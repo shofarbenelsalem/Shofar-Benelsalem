@@ -971,7 +971,7 @@ nav a.btn::after{display:none}
     <div class="foot">
       <div>
         <div class="brand"><div class="logo-box"><img class="js-logo" src="icono.png" data-alt="icono.png,icono.jpeg,icono.jpg" alt="Logo Shofar Beneisalem" onerror="imgFallback(this)"></div><div><strong>SHOFAR BENEISALEM</strong><small>C.A</small></div></div>
-        <p>Shofares, artículos de fe y recuerdos de Israel.</p>
+        <p>Shofares, artículos de fe y productos de inspiración bíblica.</p>
         <div class="social">
           <a href="#" data-wa="Hola, es un gusto saludarles. Me gustaría recibir información sobre sus shofares y demás artículos. ¿Podrían orientarme, por favor?" aria-label="WhatsApp"><span data-icon="chat" data-size="20"></span></a>
           <a href="#" id="igLink" target="_blank" rel="noopener" aria-label="Instagram"><span data-icon="insta" data-size="20"></span></a>
@@ -1151,10 +1151,6 @@ const CATEGORIES = [
   { id: "tallit",     name: "Tallit",              icon: "manto",    desc: "Tallit de poliéster en varios colores." },
   { id: "menorah",    name: "Menorah",             icon: "menora",   desc: "Menorah en distintos acabados y combinaciones de color." },
   { id: "arca",       name: "Arca Del Pacto",      icon: "arca",     desc: "Arcas del Pacto en tamaños pequeño, mediano y grande." },
-  { id: "joyeria",    name: "Joyería",             icon: "anillo",   desc: "Collares, anillos y pulseras con simbolismo." },
-  { id: "recuerdos",  name: "Recuerdos de Israel", icon: "star",     desc: "Detalles para llevar un pedacito de Israel." },
-  { id: "cosmeticos", name: "Cosméticos",          icon: "frasco",   desc: "Cuidado personal y cosmética." },
-  { id: "ropa",       name: "Ropa y Calzado",      icon: "camisa",   desc: "Prendas y calzado para toda ocasión." }
 ];
 
 /* =====================================================
@@ -1268,38 +1264,6 @@ const PRODUCTS = [
   { id: 43, cat: "libreria",   name: "Libro de historia de Israel",   desc: "Un recorrido por la historia del pueblo de Israel.", price: 20 },
   { id: 44, cat: "libreria",   name: "Diario de oración",             desc: "Cuaderno para anotar tus oraciones y gratitud.",  price: 10 },
   ===================================================== */
-  { id: 13, cat: "joyeria",    name: "Collar Estrella de David",     desc: "Acabado plateado con cadena.",                    price: 22 },
-  { id: 14, cat: "joyeria",    name: "Anillo de plata",              desc: "Anillo con inscripción en hebreo.",               price: 38 },
-  { id: 15, cat: "joyeria",    name: "Pulsera con dije de shofar",   desc: "Pulsera ajustable con dije.",                     price: 14 },
-  { id: 16, cat: "recuerdos",  name: "Imán de Jerusalén",            desc: "Recuerdo para tu nevera.",                        price: 4  },
-  { id: 17, cat: "recuerdos",  name: "Llavero de Israel",            desc: "Llavero metálico con diseño típico.",             price: 5  },
-  { id: 18, cat: "recuerdos",  name: "Taza conmemorativa",           desc: "Taza de cerámica con paisaje de Jerusalén.",      price: 12 },
-  { id: 19, cat: "cosmeticos", name: "Crema hidratante",             desc: "Cuidado diario para tu piel.",                    price: 16 },
-  { id: 20, cat: "cosmeticos", name: "Jabón natural",                desc: "Jabón artesanal en barra.",                       price: 7  },
-  { id: 21, cat: "cosmeticos", name: "Aceite aromático",             desc: "Aceite perfumado para el cuidado personal.",      price: 20 },
-  { id: 22, cat: "ropa",       name: "Camiseta con diseño de fe",    desc: "Algodón cómodo, varias tallas.",                  price: 18 },
-  { id: 23, cat: "ropa",       name: "Gorra bordada",                desc: "Gorra azul con bordado.",                         price: 12 },
-  { id: 24, cat: "ropa",       name: "Sandalias cómodas",            desc: "Calzado ligero, varias tallas.",                  price: 28 },
-  { id: 45, cat: "joyeria",    name: "Collar con dije de shofar",     desc: "Dije en acabado plateado con cadena.",            price: 24 },
-  { id: 46, cat: "joyeria",    name: "Anillo Estrella de David",      desc: "Anillo ajustable con diseño de la estrella.",     price: 26 },
-  { id: 47, cat: "joyeria",    name: "Pulsera de hilo azul",          desc: "Pulsera sencilla y resistente.",                  price: 6  },
-  { id: 48, cat: "joyeria",    name: "Aretes Estrella de David",      desc: "Aretes ligeros con diseño de la estrella.",       price: 18 },
-  { id: 49, cat: "joyeria",    name: "Colgante Jai",                  desc: "Símbolo de vida en acabado plateado.",            price: 20 },
-  { id: 50, cat: "recuerdos",  name: "Postal de Jerusalén",           desc: "Postal para coleccionar o regalar.",              price: 2  },
-  { id: 51, cat: "recuerdos",  name: "Piedra decorativa de Jerusalén", desc: "Recuerdo en piedra con diseño de Jerusalén.",    price: 6  },
-  { id: 52, cat: "recuerdos",  name: "Bandera de Israel",             desc: "Bandera de tela, ideal para decorar.",            price: 8  },
-  { id: 53, cat: "recuerdos",  name: "Marcapáginas de Israel",        desc: "Marcapáginas con diseño típico.",                 price: 3  },
-  { id: 54, cat: "recuerdos",  name: "Cuadro decorativo de Jerusalén", desc: "Cuadro pequeño para el hogar u oficina.",        price: 25 },
-  { id: 55, cat: "cosmeticos", name: "Crema de manos",                desc: "Suave y de rápida absorción.",                    price: 9  },
-  { id: 56, cat: "cosmeticos", name: "Bálsamo labial",                desc: "Cuidado diario para tus labios.",                 price: 5  },
-  { id: 57, cat: "cosmeticos", name: "Sales de baño",                 desc: "Sales aromáticas para un baño relajante.",        price: 15 },
-  { id: 58, cat: "cosmeticos", name: "Mascarilla facial",             desc: "Cuidado facial para usar en casa.",               price: 12 },
-  { id: 59, cat: "cosmeticos", name: "Perfume en roll-on",            desc: "Aroma suave y práctico para llevar.",             price: 14 },
-  { id: 60, cat: "ropa",       name: "Sudadera con capucha",          desc: "Cómoda y abrigada, varias tallas.",               price: 38 },
-  { id: 61, cat: "ropa",       name: "Camiseta blanca con diseño",    desc: "Algodón suave, varias tallas.",                   price: 18 },
-  { id: 62, cat: "ropa",       name: "Bufanda azul",                  desc: "Tejido suave para el frío.",                      price: 14 },
-  { id: 63, cat: "ropa",       name: "Zapatos casuales",              desc: "Calzado cómodo para el día a día.",               price: 45 },
-  { id: 64, cat: "ropa",       name: "Chancletas cómodas",            desc: "Ligeras y frescas, varias tallas.",               price: 16 }
 ];
 
 /* =====================================================
