@@ -6,12 +6,12 @@
 <title>Shofar Beneisalem C.A | Shofares y Artículos de Fe</title>
 <meta name="description" content="Shofar Beneisalem C.A: empresa número 1 en venta de artículos judíos y cristianos en Venezuela, con envío internacional, productos originales y calidad 100% garantizada.">
 <meta name="theme-color" content="#06080d">
-<!-- Al compartir el enlace (WhatsApp, redes). Cuando tengas tu dominio, cambia la imagen por https://tudominio.com/icono.PNG -->
+<!-- Al compartir el enlace (WhatsApp, redes). Cuando tengas tu dominio, cambia la imagen por https://tudominio.com/icono.png -->
 <meta property="og:title" content="Shofar Beneisalem C.A">
 <meta property="og:description" content="No es un negocio, sino un propósito eterno. Artículos judíos y cristianos con envío internacional.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="icono.PNG">
-<link rel="icon" href="icono.PNG">
+<meta property="og:image" content="icono.png">
+<link rel="icon" type="image/png" href="./icono.png?v=3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script>
@@ -687,7 +687,7 @@ nav a.btn::after{display:none}
 
 <!-- ============ ENTRADA ============ -->
 <div id="splash">
-  <img class="mark js-logo" src="icono.PNG" data-alt="icono.png,icono.jpeg,icono.jpg" alt="Shofar Beneisalem" onerror="imgFallback(this)">
+  <img class="mark js-logo" src="icono.png" data-alt="icono.png,icono.jpeg,icono.jpg" alt="Shofar Beneisalem" onerror="imgFallback(this)">
   <h1>SHOFAR BENEISALEM</h1>
   <div class="sub">Fe &nbsp;·&nbsp; Tradición &nbsp;·&nbsp; Israel</div>
   <div class="bar"><i></i></div>
@@ -701,7 +701,7 @@ nav a.btn::after{display:none}
   <div class="overlay" id="navOverlay"></div>
   <div class="container nav">
     <a href="#inicio" class="brand">
-      <div class="logo-box"><img class="js-logo" src="icono.PNG" data-alt="icono.png,icono.jpeg,icono.jpg" alt="Logo Shofar Beneisalem" onerror="imgFallback(this)"></div>
+      <div class="logo-box"><img class="js-logo" src="icono.png" data-alt="icono.png,icono.jpeg,icono.jpg" alt="Logo Shofar Beneisalem" onerror="imgFallback(this)"></div>
       <div><strong>SHOFAR BENEISALEM</strong><small>C.A</small></div>
     </a>
     <nav id="menu">
@@ -736,7 +736,7 @@ nav a.btn::after{display:none}
       </div>
     </div>
     <div class="hero-art hz" style="--d:.3s">
-      <img class="hero-logo js-logo" src="icono.PNG" data-alt="icono.png,icono.jpeg,icono.jpg" alt="Shofar Beneisalem" onerror="imgFallback(this)">
+      <img class="hero-logo js-logo" src="icono.png" data-alt="icono.png,icono.jpeg,icono.jpg" alt="Shofar Beneisalem" onerror="imgFallback(this)">
     </div>
   </div>
 </div>
@@ -899,7 +899,7 @@ nav a.btn::after{display:none}
     </div>
     <div class="foot">
       <div>
-        <div class="brand"><div class="logo-box"><img class="js-logo" src="icono.PNG" data-alt="icono.png,icono.jpeg,icono.jpg" alt="Logo Shofar Beneisalem" onerror="imgFallback(this)"></div><div><strong>SHOFAR BENEISALEM</strong><small>C.A</small></div></div>
+        <div class="brand"><div class="logo-box"><img class="js-logo" src="icono.png" data-alt="icono.png,icono.jpeg,icono.jpg" alt="Logo Shofar Beneisalem" onerror="imgFallback(this)"></div><div><strong>SHOFAR BENEISALEM</strong><small>C.A</small></div></div>
         <p>Shofares, artículos de fe y recuerdos de Israel.</p>
         <div class="social">
           <a href="#" data-wa="Hola, es un gusto saludarles. Me gustaría recibir información sobre sus shofares y demás artículos. ¿Podrían orientarme, por favor?" aria-label="WhatsApp"><span data-icon="chat" data-size="20"></span></a>
@@ -1052,7 +1052,7 @@ const CONFIG = {
   fotosListas: false,           // true = usa las fotos ya procesadas de la carpeta "listas" (se ven igual abriendo con doble clic)
   quitarFondoFotos: true,       // true = quita el fondo blanco de las fotos de productos automáticamente
   vistaPrevia: 4,               // productos por categoría que se ven en "Todos" (el resto con "Ver todos")
-  quitarFondoBlancoLogo: true,  // true = si tu icono.PNG tiene fondo blanco, se lo quita automáticamente
+  quitarFondoBlancoLogo: true,  // true = si tu icono.png tiene fondo blanco, se lo quita automáticamente
 
   // Datos de pago mostrados en la imagen de "Métodos de pago".
   // El Zelle aparece sin dato en la imagen, por eso se consulta por WhatsApp.
@@ -2006,41 +2006,51 @@ function validateBuyerName() {
   return valid;
 }
 
-function validateInternationalPhone() {
+function getPhoneParts() {
   const input = $("#payerPhone");
   const raw = (input.value || "").trim();
+  const digitsRaw = raw.replace(/\D/g, "");
+  const country = payerPhoneWidget ? payerPhoneWidget.getSelectedCountryData() : null;
+  const dial = String(country && country.dialCode || "58");
+
+  let national = digitsRaw;
+  // Si el usuario pegó el número internacional completo (+58...), elimina
+  // el prefijo del campo: el selector ya aporta ese código.
+  if (national.startsWith(dial) && national.length > 7) {
+    national = national.slice(dial.length);
+  }
+  // En Venezuela muchos usuarios escriben el 0 nacional (0414...).
+  if (dial === "58" && national.length === 11 && national.startsWith("0")) {
+    national = national.slice(1);
+  }
+  return { dial, national, raw, country };
+}
+
+function validateInternationalPhone() {
+  const input = $("#payerPhone");
+  const { dial, national, raw } = getPhoneParts();
   let valid = false;
 
-  if (payerPhoneWidget && raw) {
-    const selected = payerPhoneWidget.getSelectedCountryData();
-    const dial = String(selected && selected.dialCode || "");
-    const digits = raw.replace(/\D/g, "");
-    // Evita validar como número nacional uno que todavía contenga el prefijo
-    // internacional repetido dentro del campo.
-    const duplicated = /^\s*(?:\+|00)/.test(raw) && dial && digits.startsWith(dial);
-    valid = !duplicated && payerPhoneWidget.isValidNumber();
-  } else {
-    const digits = raw.replace(/\D/g, "");
-    valid = digits.length >= 7 && digits.length <= 15;
+  if (raw) {
+    if (dial === "58") {
+      // Móviles venezolanos: 10 dígitos nacionales, iniciando en 4.
+      valid = national.length === 10 && /^4\d{9}$/.test(national);
+    } else {
+      // Validación estructural internacional cuando la librería no carga
+      // sus datos de numeración; no afirma que el número esté activo.
+      valid = national.length >= 7 && national.length <= 12;
+    }
   }
 
   input.classList.toggle("invalid", !valid);
   input.classList.toggle("valid", valid);
-  input.setCustomValidity(valid ? "" : "Selecciona tu país e introduce un número válido.");
+  input.setCustomValidity(valid ? "" : "Introduce un teléfono válido para el país seleccionado.");
   return valid;
 }
 
 function getInternationalPhone() {
-  if (payerPhoneWidget) {
-    const number = payerPhoneWidget.getNumber();
-    // Defensa adicional frente a prefijos duplicados.
-    const selected = payerPhoneWidget.getSelectedCountryData();
-    const dial = String(selected && selected.dialCode || "");
-    const digits = String(number || "").replace(/\D/g, "");
-    if (dial && digits.startsWith(dial + dial)) return "+" + digits.slice(dial.length);
-    return number;
-  }
-  return ($("#payerPhone").value || "").trim();
+  const { dial, national } = getPhoneParts();
+  return national ? "+" + dial + national : "";
 }
 
 function isNationalPayment(method) {
@@ -2058,9 +2068,56 @@ function formatBs(value) {
 async function fetchBinanceP2PRate() {
   if (binanceRatePromise) return binanceRatePromise;
   binanceRatePromise = (async () => {
-    // Intento 1: Binance P2P. Algunos navegadores/hostings bloquean esta
-    // consulta por CORS; por eso hay una alternativa pública de referencia.
+    const extractRate = (value) => {
+      if (value == null) return null;
+      if (typeof value === "number" || typeof value === "string") {
+        const n = Number(value);
+        return Number.isFinite(n) && n > 0 ? n : null;
+      }
+      if (Array.isArray(value)) {
+        for (const item of value) {
+          const found = extractRate(item);
+          if (found) return found;
+        }
+        return null;
+      }
+      if (typeof value === "object") {
+        for (const key of ["price", "quotePrice", "sellPrice", "sell", "rate", "averagePrice", "avgPrice"]) {
+          if (value[key] != null) {
+            const found = extractRate(value[key]);
+            if (found) return found;
+          }
+        }
+        for (const key of ["data", "result", "quote", "ticker"]) {
+          if (value[key] != null) {
+            const found = extractRate(value[key]);
+            if (found) return found;
+          }
+        }
+      }
+      return null;
+    };
+
+    // API pública de cotización P2P de Binance.
+    const quoteUrl = "https://www.binance.com/bapi/c2c/v1/public/c2c/agent/quote-price?fiat=VES&asset=USDT&tradeType=SELL";
     try {
+      const response = await fetch(quoteUrl, {
+        method: "GET",
+        headers: { "Accept": "application/json" },
+        cache: "no-store"
+      });
+      if (!response.ok) throw new Error("Cotización P2P no disponible");
+      const data = await response.json();
+      const rate = extractRate(data);
+      if (!rate) throw new Error("Binance no devolvió una cotización reconocible");
+      binanceRateSource = "Binance P2P";
+      binanceRateP2P = true;
+      binanceRateUpdatedAt = new Date();
+      binanceP2PRate = rate;
+      return rate;
+    } catch (quoteError) {
+      // Segunda opción: consulta pública de anuncios P2P. Puede estar limitada
+      // por CORS desde GitHub Pages; si ocurre, se informa sin inventar tasa.
       const response = await fetch("https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search", {
         method: "POST",
         headers: {
@@ -2075,36 +2132,20 @@ async function fetchBinanceP2PRate() {
         }),
         cache: "no-store"
       });
-      if (!response.ok) throw new Error("Binance P2P no disponible");
+      if (!response.ok) throw new Error("Binance P2P no disponible desde este hosting");
       const json = await response.json();
       const prices = (json.data || [])
         .map(item => Number(item?.adv?.price))
         .filter(value => Number.isFinite(value) && value > 0)
         .sort((x, y) => x - y);
-      if (!prices.length) throw new Error("Binance P2P no devolvió ofertas");
-      const mid = Math.floor(prices.length / 2);
+      if (!prices.length) throw new Error("Binance P2P no devolvió anuncios");
+      const middle = Math.floor(prices.length / 2);
       const rate = prices.length % 2
-        ? prices[mid]
-        : (prices[mid - 1] + prices[mid]) / 2;
-      binanceRateSource = "Binance P2P";
-      binanceRateUpdatedAt = new Date();
+        ? prices[middle]
+        : (prices[middle - 1] + prices[middle]) / 2;
+      binanceRateSource = "Binance P2P (mediana de anuncios)";
       binanceRateP2P = true;
-      binanceP2PRate = rate;
-      return rate;
-    } catch (p2pError) {
-      // Alternativa HTML-only con CORS: tasa de mercado de USDT en VES.
-      // No se presenta como cotización P2P de Binance.
-      const fallback = await fetch(
-        "https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=ves",
-        { headers: { "Accept": "application/json" }, cache: "no-store" }
-      );
-      if (!fallback.ok) throw new Error("No se pudo consultar una tasa pública");
-      const data = await fallback.json();
-      const rate = Number(data?.tether?.ves);
-      if (!Number.isFinite(rate) || rate <= 0) throw new Error("Tasa USDT/VES no válida");
-      binanceRateSource = "Referencia de mercado CoinGecko (no es Binance P2P)";
       binanceRateUpdatedAt = new Date();
-      binanceRateP2P = false;
       binanceP2PRate = rate;
       return rate;
     }
@@ -2131,7 +2172,7 @@ async function updateNationalPaymentDisplay() {
     $("#nationalTotalBs").textContent = "Total aproximado: " + formatBs(totalUSD * rate);
   } catch (error) {
     $("#nationalRateValue").textContent = "No se pudo consultar la tasa en vivo.";
-    $("#nationalRateDate").textContent = "Comprueba tu conexión e inténtalo de nuevo. La consulta puede depender de la disponibilidad del proveedor.";
+    $("#nationalRateDate").textContent = "GitHub Pages no pudo acceder a la cotización P2P de Binance. Inténtalo más tarde o consulta Binance P2P manualmente.";
     $("#nationalTotalBs").textContent = "El total en USD se mantiene; no se aplicó una tasa inventada.";
   }
 }
@@ -2633,8 +2674,6 @@ async function validatePaymentAndSend() {
 }
 
 $("#payerName").addEventListener("input", validateBuyerName);
-$("#payerPhone").addEventListener("input", validateInternationalPhone);
-$("#payerPhone").addEventListener("countrychange", validateInternationalPhone);
 $("#validatePayment").addEventListener("click", validatePaymentAndSend);
 
 
