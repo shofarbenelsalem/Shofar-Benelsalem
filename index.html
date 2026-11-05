@@ -664,6 +664,21 @@ nav a.btn::after{display:none}
   .payment-order-list{max-height:150px}
 }
 
+
+/* Sección de misión y video */
+.mission-story{padding:clamp(54px,7vw,88px) 0;background:linear-gradient(135deg,#f7f8fc,#eef2fb);border-top:1px solid rgba(20,35,70,.08)}
+.mission-story-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(280px,.92fr);gap:clamp(24px,4vw,52px);align-items:center}
+.mission-story-copy h3{font-size:clamp(1.8rem,3.5vw,2.7rem);line-height:1.12;margin:10px 0 18px;color:#111b35}
+.mission-story-copy h3 em{color:var(--royal);font-style:normal}
+.mission-story-copy p{color:#47536c;line-height:1.75;margin:0 0 13px}
+.mission-follow a{color:var(--royal);font-weight:800;text-decoration:none}
+.mission-signature{margin-top:20px;padding-top:16px;border-top:1px solid rgba(20,35,70,.14);font-weight:900;letter-spacing:.04em;color:#111b35}
+.mission-signature span{display:block;margin-top:5px;font-size:.82rem;letter-spacing:0;font-weight:600;color:#68738a}
+.mission-story-video{min-width:0}
+.mission-story-video video{display:block;width:100%;max-height:520px;aspect-ratio:16/10;object-fit:contain;background:#080b14;border-radius:18px;box-shadow:0 18px 48px rgba(10,20,50,.18)}
+.mission-story-video small{display:block;margin-top:10px;color:#68738a;text-align:center}
+@media(max-width:800px){.mission-story-grid{grid-template-columns:1fr}.mission-story-video{order:2}.mission-story-video video{aspect-ratio:16/9}}
+
 </style>
 <noscript><style>.hz,.reveal{opacity:1!important;transform:none!important}#splash{display:none}</style></noscript>
 </head>
@@ -846,6 +861,31 @@ nav a.btn::after{display:none}
         <div class="fact"><b>Israel y EE. UU.</b><span>Origen de nuestros productos</span></div>
         <div class="fact"><b>Internacional</b><span>Alcance de la empresa</span></div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ NUESTRA MISIÓN ============ -->
+<section class="mission-story" id="mision">
+  <div class="container mission-story-grid">
+    <div class="mission-story-copy">
+      <div class="kicker">Shofar Venezuela · @shofarvenezuela</div>
+      <h3>Más que productos, <em>una misión con propósito</em></h3>
+      <p>¿Sabías que al adquirir un producto de <strong>@shofarvenezuela</strong> también te conviertes en parte de una misión?</p>
+      <p>Cada compra va más allá de obtener un producto: es una oportunidad de contribuir con las obras sociales de nuestros ministerios, apoyar viajes misioneros y respaldar iniciativas que buscan llevar el amor de Jesús a más personas.</p>
+      <p>De esta manera, tú también te conviertes en un instrumento en las manos de Dios para seguir extendiendo su Reino aquí en la tierra. 🌎🔥</p>
+      <p><strong>¡Tu compra puede ser parte de algo mucho más grande!</strong></p>
+      <p>Te invitamos a visitar nuestras redes sociales, conocer nuestro catálogo y escoger el producto de tu preferencia. Pronto tendremos nuestra Página Web!</p>
+      <p class="mission-follow">Síguenos en <a href="https://instagram.com/shofarvenezuela" target="_blank" rel="noopener">@shofarvenezuela</a></p>
+      <div class="mission-signature">Beneisale​​m <span>| Más que productos, una misión con propósito.</span></div>
+    </div>
+    <div class="mission-story-video">
+      <video controls playsinline preload="metadata" aria-label="Video de Shofar Venezuela">
+        <source src="final.mp4" type="video/mp4">
+        Tu navegador no puede reproducir este video. Comprueba que final.mp4 esté en el repositorio.
+      </video>
+      <small>Haz clic en reproducir para ver nuestro mensaje.</small>
     </div>
   </div>
 </section>
@@ -1287,7 +1327,7 @@ function openWhatsAppDirect(text) {
   const encodedText = encodeURIComponent(text);
   const phone = CONFIG.whatsapp;
   const appUrl = "whatsapp://send?phone=" + phone + "&text=" + encodedText;
-  const webUrl = "https://web.whatsapp.com/send/?phone=" + phone + "&text=" + encodedText;
+  const webUrl = "https://web.whatsapp.com/send?phone=" + phone + "&text=" + encodedText;
   const fallbackUrl = waLink(text);
 
   return new Promise((resolve) => {
@@ -1909,15 +1949,17 @@ function orderMessage(prefix) {
 // La página valida formato; no puede certificar por sí sola que una identidad sea real.
 let payerPhoneWidget = null;
 let binanceP2PRate = null;
+let binanceRateSource = '';
+let binanceRateP2P = false;
 let binanceRateUpdatedAt = null;
 let binanceRatePromise = null;
 
 function initInternationalPhone() {
   const input = $("#payerPhone");
-  if (!input || !window.intlTelInput) return;
-  if (payerPhoneWidget) return;
+  if (!input || !window.intlTelInput || payerPhoneWidget) return;
+
   payerPhoneWidget = window.intlTelInput(input, {
-    initialCountry: "auto",
+    initialCountry: "ve",
     preferredCountries: ["ve", "co", "pe", "us", "mx", "cl", "ar", "ec", "es"],
     separateDialCode: true,
     nationalMode: true,
@@ -1925,8 +1967,33 @@ function initInternationalPhone() {
     autoPlaceholder: "polite",
     utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/utils.js"
   });
-}
 
+  // Con separateDialCode el prefijo ya aparece fuera del campo.
+  // Si el comprador pega también +58 (u otro prefijo seleccionado), lo quitamos
+  // del valor escrito para evitar que se duplique al generar el número E.164.
+  const removeRepeatedDialCode = () => {
+    const selected = payerPhoneWidget.getSelectedCountryData();
+    const dial = String(selected && selected.dialCode || "");
+    let value = (input.value || "").trim();
+    if (!dial || !value) return;
+
+    const digits = value.replace(/\D/g, "");
+    const startsWithInternationalPrefix = /^\s*(?:\+|00)/.test(value);
+    if (startsWithInternationalPrefix && digits.startsWith(dial)) {
+      const national = digits.slice(dial.length);
+      input.value = national;
+    }
+  };
+
+  input.addEventListener("input", () => {
+    removeRepeatedDialCode();
+    validateInternationalPhone();
+  });
+  input.addEventListener("countrychange", () => {
+    removeRepeatedDialCode();
+    validateInternationalPhone();
+  });
+}
 function validateBuyerName() {
   const input = $("#payerName");
   const value = (input.value || "").trim().replace(/\s+/g, " ");
@@ -1943,13 +2010,20 @@ function validateInternationalPhone() {
   const input = $("#payerPhone");
   const raw = (input.value || "").trim();
   let valid = false;
+
   if (payerPhoneWidget && raw) {
-    valid = payerPhoneWidget.isValidNumber();
+    const selected = payerPhoneWidget.getSelectedCountryData();
+    const dial = String(selected && selected.dialCode || "");
+    const digits = raw.replace(/\D/g, "");
+    // Evita validar como número nacional uno que todavía contenga el prefijo
+    // internacional repetido dentro del campo.
+    const duplicated = /^\s*(?:\+|00)/.test(raw) && dial && digits.startsWith(dial);
+    valid = !duplicated && payerPhoneWidget.isValidNumber();
   } else {
-    // Fallback conservador si la librería externa no carga.
     const digits = raw.replace(/\D/g, "");
     valid = digits.length >= 7 && digits.length <= 15;
   }
+
   input.classList.toggle("invalid", !valid);
   input.classList.toggle("valid", valid);
   input.setCustomValidity(valid ? "" : "Selecciona tu país e introduce un número válido.");
@@ -1957,7 +2031,15 @@ function validateInternationalPhone() {
 }
 
 function getInternationalPhone() {
-  if (payerPhoneWidget) return payerPhoneWidget.getNumber();
+  if (payerPhoneWidget) {
+    const number = payerPhoneWidget.getNumber();
+    // Defensa adicional frente a prefijos duplicados.
+    const selected = payerPhoneWidget.getSelectedCountryData();
+    const dial = String(selected && selected.dialCode || "");
+    const digits = String(number || "").replace(/\D/g, "");
+    if (dial && digits.startsWith(dial + dial)) return "+" + digits.slice(dial.length);
+    return number;
+  }
   return ($("#payerPhone").value || "").trim();
 }
 
@@ -1976,31 +2058,59 @@ function formatBs(value) {
 async function fetchBinanceP2PRate() {
   if (binanceRatePromise) return binanceRatePromise;
   binanceRatePromise = (async () => {
-    const endpoint = "https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search";
-    const payload = {
-      page: 1, rows: 10, payTypes: [], asset: "USDT", tradeType: "SELL",
-      fiat: "VES", publisherType: null
-    };
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "clienttype": "web" },
-      body: JSON.stringify(payload),
-      cache: "no-store"
-    });
-    if (!response.ok) throw new Error("Binance P2P no respondió.");
-    const json = await response.json();
-    const prices = (json.data || []).map(x => Number(x.adv && x.adv.price)).filter(x => Number.isFinite(x) && x > 0);
-    if (!prices.length) throw new Error("No hay ofertas USDT/VES disponibles en Binance P2P.");
-    prices.sort((a,b) => a-b);
-    const mid = Math.floor(prices.length / 2);
-    const rate = prices.length % 2 ? prices[mid] : (prices[mid - 1] + prices[mid]) / 2;
-    binanceP2PRate = rate;
-    binanceRateUpdatedAt = new Date();
-    return rate;
+    // Intento 1: Binance P2P. Algunos navegadores/hostings bloquean esta
+    // consulta por CORS; por eso hay una alternativa pública de referencia.
+    try {
+      const response = await fetch("https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "clienttype": "web",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          page: 1, rows: 10, payTypes: [],
+          asset: "USDT", tradeType: "SELL", fiat: "VES",
+          publisherType: null
+        }),
+        cache: "no-store"
+      });
+      if (!response.ok) throw new Error("Binance P2P no disponible");
+      const json = await response.json();
+      const prices = (json.data || [])
+        .map(item => Number(item?.adv?.price))
+        .filter(value => Number.isFinite(value) && value > 0)
+        .sort((x, y) => x - y);
+      if (!prices.length) throw new Error("Binance P2P no devolvió ofertas");
+      const mid = Math.floor(prices.length / 2);
+      const rate = prices.length % 2
+        ? prices[mid]
+        : (prices[mid - 1] + prices[mid]) / 2;
+      binanceRateSource = "Binance P2P";
+      binanceRateUpdatedAt = new Date();
+      binanceRateP2P = true;
+      binanceP2PRate = rate;
+      return rate;
+    } catch (p2pError) {
+      // Alternativa HTML-only con CORS: tasa de mercado de USDT en VES.
+      // No se presenta como cotización P2P de Binance.
+      const fallback = await fetch(
+        "https://api.coingecko.com/api/v3/simple/price?ids=tether&vs_currencies=ves",
+        { headers: { "Accept": "application/json" }, cache: "no-store" }
+      );
+      if (!fallback.ok) throw new Error("No se pudo consultar una tasa pública");
+      const data = await fallback.json();
+      const rate = Number(data?.tether?.ves);
+      if (!Number.isFinite(rate) || rate <= 0) throw new Error("Tasa USDT/VES no válida");
+      binanceRateSource = "Referencia de mercado CoinGecko (no es Binance P2P)";
+      binanceRateUpdatedAt = new Date();
+      binanceRateP2P = false;
+      binanceP2PRate = rate;
+      return rate;
+    }
   })().finally(() => { binanceRatePromise = null; });
   return binanceRatePromise;
 }
-
 async function updateNationalPaymentDisplay() {
   const method = (CONFIG.pagos || []).find(m => m.id === selectedPaymentMethod);
   const box = $("#nationalRate");
@@ -2010,18 +2120,18 @@ async function updateNationalPaymentDisplay() {
     return;
   }
   box.hidden = false;
-  $("#nationalRateValue").textContent = "Consultando Binance P2P (USDT/VES)…";
+  $("#nationalRateValue").textContent = "Consultando tasa USDT/VES…";
   $("#nationalRateDate").textContent = "Se consulta la tasa vigente al momento de abrir el pago.";
   $("#nationalTotalBs").textContent = "";
   try {
     const rate = await fetchBinanceP2PRate();
     const totalUSD = orderData().total;
     $("#nationalRateValue").textContent = "1 USDT ≈ " + formatBs(rate);
-    $("#nationalRateDate").textContent = "Actualizado: " + binanceRateUpdatedAt.toLocaleString("es-VE");
+    $("#nationalRateDate").textContent = "Fuente: " + (binanceRateSource || "consulta pública") + " · Actualizado: " + binanceRateUpdatedAt.toLocaleString("es-VE");
     $("#nationalTotalBs").textContent = "Total aproximado: " + formatBs(totalUSD * rate);
   } catch (error) {
     $("#nationalRateValue").textContent = "No se pudo consultar la tasa en vivo.";
-    $("#nationalRateDate").textContent = "Comprueba tu conexión o consulta la tasa Binance P2P antes de pagar.";
+    $("#nationalRateDate").textContent = "Comprueba tu conexión e inténtalo de nuevo. La consulta puede depender de la disponibilidad del proveedor.";
     $("#nationalTotalBs").textContent = "El total en USD se mantiene; no se aplicó una tasa inventada.";
   }
 }
@@ -2427,16 +2537,10 @@ async function validatePaymentAndSend() {
   $("#paymentStatus").textContent = "Preparando el comprobante para WhatsApp…";
 
   const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-  const webUrl =
-    "https://web.whatsapp.com/send/?phone=" +
-    CONFIG.whatsapp +
-    "&text=" +
-    encodeURIComponent(msg);
-  const appUrl =
-    "https://wa.me/" +
-    String(CONFIG.whatsapp || "").replace(/\D/g, "") +
-    "?text=" +
-    encodeURIComponent(msg);
+  const cleanWhatsApp = String(CONFIG.whatsapp || "").replace(/\D/g, "");
+  const encodedMessage = encodeURIComponent(msg);
+  const webUrl = "https://web.whatsapp.com/send?phone=" + cleanWhatsApp + "&text=" + encodedMessage;
+  const appUrl = "https://wa.me/" + cleanWhatsApp + "?text=" + encodedMessage;
 
   // MÓVIL: compartir el archivo original mediante el menú nativo.
   // El usuario elige WhatsApp y confirma el envío; el navegador no puede
