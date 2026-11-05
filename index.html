@@ -679,6 +679,55 @@ nav a.btn::after{display:none}
 .mission-story-video small{display:block;margin-top:10px;color:#68738a;text-align:center}
 @media(max-width:800px){.mission-story-grid{grid-template-columns:1fr}.mission-story-video{order:2}.mission-story-video video{aspect-ratio:16/9}}
 
+
+
+/* ---------- Envíos gratis internacionales ---------- */
+.shipping-free{position:relative;overflow:hidden;padding:58px 18px 54px;background:radial-gradient(ellipse at 50% -30%,rgba(59,103,220,.28),transparent 65%),linear-gradient(135deg,#080d1b,#101a32 55%,#080d1b);border-top:1px solid rgba(125,166,255,.18);border-bottom:1px solid rgba(125,166,255,.18);color:#fff;text-align:center}
+.shipping-free:before,.shipping-free:after{content:"";position:absolute;width:260px;height:260px;border:1px solid rgba(126,169,255,.12);border-radius:50%;pointer-events:none}
+.shipping-free:before{left:-150px;top:-150px}.shipping-free:after{right:-150px;bottom:-180px}
+.shipping-free .ship-kicker{display:inline-flex;align-items:center;gap:9px;margin-bottom:12px;padding:7px 15px;border:1px solid rgba(141,177,255,.32);border-radius:30px;background:rgba(58,101,209,.16);color:#bcd0ff;font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.shipping-free h3{margin:0 auto 10px;font-family:var(--serif);font-size:clamp(2rem,5vw,3.25rem);line-height:1.05;letter-spacing:.025em;color:#fff}
+.shipping-free h3 span{color:#9dbaff;text-shadow:0 0 24px rgba(90,139,255,.35)}
+.shipping-free .ship-sub{margin:0 auto 30px;color:#d5def2;font-size:clamp(.95rem,2vw,1.08rem)}
+.shipping-free .ship-origin{display:inline-flex;align-items:center;gap:6px;margin-left:4px;color:#fff;white-space:nowrap}
+.shipping-free .ship-origin .ship-flag{font-size:1.35rem;line-height:1}
+.shipping-free .ship-destinations{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:stretch;gap:14px;max-width:970px;margin:0 auto 26px}
+.shipping-free .ship-destination{min-width:0;display:flex;align-items:center;justify-content:center;gap:0;padding:18px 12px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.035));box-shadow:0 10px 28px rgba(0,0,0,.18);animation:shipFloat 3.6s ease-in-out infinite;transition:transform .25s,border-color .25s,background .25s}
+.shipping-free .ship-destination:nth-child(2){animation-delay:.25s}.shipping-free .ship-destination:nth-child(3){animation-delay:.5s}.shipping-free .ship-destination:nth-child(4){animation-delay:.75s}.shipping-free .ship-destination:nth-child(5){animation-delay:1s}.shipping-free .ship-destination:nth-child(6){animation-delay:1.25s}.shipping-free .ship-destination:nth-child(7){animation-delay:1.5s}.shipping-free .ship-destination:nth-child(8){animation-delay:1.75s}.shipping-free .ship-destination:nth-child(9){animation-delay:2s}.shipping-free .ship-destination:nth-child(10){animation-delay:2.25s}
+.shipping-free .ship-destination:hover{transform:translateY(-7px) scale(1.035);border-color:rgba(153,184,255,.55);background:rgba(69,111,220,.2)}
+.shipping-free .ship-flag{font-size:3.35rem;line-height:1;filter:drop-shadow(0 4px 7px rgba(0,0,0,.28));flex:0 0 auto}
+.shipping-free .ship-country{display:none}
+.shipping-free .ship-note{display:inline-flex;align-items:center;gap:8px;margin:0;padding:9px 16px;border-radius:30px;background:rgba(255,255,255,.07);color:#cbd8f4;font-size:.86rem}
+.shipping-free .ship-note strong{color:#fff}
+@keyframes shipFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@media(max-width:760px){.shipping-free .ship-destinations{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}}
+@media(max-width:480px){.shipping-free{padding:44px 13px}.shipping-free .ship-destinations{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.shipping-free .ship-destination{padding:12px 8px;gap:8px}.shipping-free .ship-flag{font-size:2.8rem}.shipping-free .ship-country{font-size:.8rem}}
+@media(prefers-reduced-motion:reduce){.shipping-free .ship-destination{animation:none}}
+
+
+/* Banderas SVG integradas: no dependen de emojis ni de la fuente del dispositivo */
+.shipping-free .flag-svg{display:block;width:68px;height:46px;flex:0 0 auto;border-radius:5px;overflow:hidden;filter:drop-shadow(0 4px 7px rgba(0,0,0,.28))}
+.shipping-free .ship-destination{min-height:82px}
+.shipping-free .ship-origin .flag-svg{width:34px;height:23px}
+@media(max-width:480px){.shipping-free .flag-svg{width:58px;height:39px}.shipping-free .ship-origin .flag-svg{width:30px;height:20px}}
+
+
+/* Banderas como archivos de imagen locales: PNG, JPG, JPEG, WEBP, GIF, AVIF */
+.shipping-free .ship-flag-image{display:block;width:68px;height:46px;flex:0 0 auto;object-fit:cover;border-radius:5px;filter:drop-shadow(0 4px 7px rgba(0,0,0,.28));animation:shipFlagFloat 3.6s ease-in-out infinite}
+.shipping-free .ship-destination:nth-child(2) .ship-flag-image{animation-delay:.25s}
+.shipping-free .ship-destination:nth-child(3) .ship-flag-image{animation-delay:.5s}
+.shipping-free .ship-destination:nth-child(4) .ship-flag-image{animation-delay:.75s}
+.shipping-free .ship-destination:nth-child(5) .ship-flag-image{animation-delay:1s}
+.shipping-free .ship-destination:nth-child(6) .ship-flag-image{animation-delay:1.25s}
+.shipping-free .ship-destination:nth-child(7) .ship-flag-image{animation-delay:1.5s}
+.shipping-free .ship-destination:nth-child(8) .ship-flag-image{animation-delay:1.75s}
+.shipping-free .ship-destination:nth-child(9) .ship-flag-image{animation-delay:2s}
+.shipping-free .ship-destination:nth-child(10) .ship-flag-image{animation-delay:2.25s}
+.shipping-free .ship-origin .ship-flag-image{width:34px;height:23px;animation:none}
+@keyframes shipFlagFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@media(max-width:480px){.shipping-free .ship-flag-image{width:58px;height:39px}.shipping-free .ship-origin .ship-flag-image{width:30px;height:20px}}
+@media(prefers-reduced-motion:reduce){.shipping-free .ship-flag-image{animation:none}}
+
 </style>
 <noscript><style>.hz,.reveal{opacity:1!important;transform:none!important}#splash{display:none}</style></noscript>
 </head>
@@ -740,6 +789,28 @@ nav a.btn::after{display:none}
     </div>
   </div>
 </div>
+
+
+<!-- ============ ENVÍOS GRATIS INTERNACIONALES ============ -->
+<section class="shipping-free" id="envios-gratis" aria-label="Países con envío gratis">
+  <div class="ship-kicker">✦ SHOFAR BENEISALEM · ENVÍOS INTERNACIONALES</div>
+  <h3>¡<span>Envío Gratis</span>!</h3>
+  <p class="ship-sub">Directo desde <span class="ship-origin"><img class="ship-flag-image" data-flag-names="israel" alt="Bandera de Israel" loading="lazy"> <strong>Israel</strong></span> a nuestros destinos seleccionados.</p>
+
+  <div class="ship-destinations">
+    <div class="ship-destination"><img class="ship-flag-image" data-flag-names="venezuela" alt="Bandera de Venezuela" loading="lazy"></div>
+    <div class="ship-destination"><img class="ship-flag-image" data-flag-names="mexico|méxico" alt="Bandera de México" loading="lazy"></div>
+    <div class="ship-destination"><img class="ship-flag-image" data-flag-names="estadosunidos|estados-unidos|estados unidos|eeuu|usa" alt="Bandera de Estados Unidos" loading="lazy"></div>
+    <div class="ship-destination"><img class="ship-flag-image" data-flag-names="españa|espana" alt="Bandera de España" loading="lazy"></div>
+    <div class="ship-destination"><img class="ship-flag-image" data-flag-names="puertorico|puerto-rico|puerto rico" alt="Bandera de Puerto Rico" loading="lazy"></div>
+    <div class="ship-destination"><img class="ship-flag-image" data-flag-names="colombia" alt="Bandera de Colombia" loading="lazy"></div>
+    <div class="ship-destination"><img class="ship-flag-image" data-flag-names="chile" alt="Bandera de Chile" loading="lazy"></div>
+    <div class="ship-destination"><img class="ship-flag-image" data-flag-names="canada|canadá" alt="Bandera de Canadá" loading="lazy"></div>
+    <div class="ship-destination"><img class="ship-flag-image" data-flag-names="costarica|costa-rica|costa rica" alt="Bandera de Costa Rica" loading="lazy"></div>
+    <div class="ship-destination"><img class="ship-flag-image" data-flag-names="africa|áfrica" alt="Bandera de África" loading="lazy"></div>
+  </div>
+  <p class="ship-note">✨ <strong>Próximamente más países</strong></p>
+</section>
 
 <!-- ============ CONFIANZA ============ -->
 <div class="trust">
@@ -2887,5 +2958,29 @@ renderProducts();
 renderCart();
 startReveal();
 </script>
+
+<script>
+/* Busca cada bandera en la misma carpeta del index.html, probando extensiones y nombres alternativos. */
+(function loadLocalShippingFlags(){
+  const extensions = ["png","jpg","jpeg","webp","gif","avif","PNG","JPG","JPEG","WEBP"];
+  document.querySelectorAll(".shipping-free img[data-flag-names]").forEach((img) => {
+    const stems = (img.dataset.flagNames || "").split("|").filter(Boolean);
+    const candidates = [];
+    stems.forEach((stem) => extensions.forEach((ext) => candidates.push("./" + stem + "." + ext)));
+    let index = 0;
+    const tryNext = () => {
+      if (index >= candidates.length) {
+        img.style.display = "none";
+        console.warn("No se encontró la imagen de bandera:", stems.join(", "));
+        return;
+      }
+      img.src = candidates[index++];
+    };
+    img.addEventListener("error", tryNext);
+    tryNext();
+  });
+})();
+</script>
+
 </body>
 </html>
