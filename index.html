@@ -729,6 +729,153 @@ nav a.btn::after{display:none}
 @media(max-width:480px){.shipping-free .ship-flag-image{width:58px;height:39px}.shipping-free .ship-origin .ship-flag-image{width:30px;height:20px}}
 @media(prefers-reduced-motion:reduce){.shipping-free .ship-flag-image{animation:none}}
 
+
+/* =====================================================
+   MEJORA RESPONSIVE + ENTRADA RÁPIDA
+   Se conserva el diseño original y se ajustan pantallas pequeñas.
+   ===================================================== */
+#splash{
+  gap:clamp(10px,2.2vh,18px);
+  padding:24px;
+  transition:opacity .35s ease,visibility .35s ease;
+}
+#splash .mark{
+  width:auto;
+  height:clamp(76px,12vh,112px);
+  max-width:min(42vw,190px);
+  animation:popin .55s .05s forwards,halo 2.4s .6s infinite;
+}
+#splash h1{
+  font-size:clamp(1.35rem,4.8vw,2.8rem);
+  letter-spacing:clamp(.08em,1.3vw,.2em);
+  animation:rise .5s .12s forwards;
+}
+#splash .sub{
+  font-size:clamp(.58rem,1.8vw,.72rem);
+  letter-spacing:clamp(.18em,.7vw,.42em);
+  animation:rise .5s .18s forwards;
+}
+#splash .bar{width:min(150px,48vw)}
+#splash .bar i{animation:load .65s .1s forwards}
+
+@media(max-width:860px){
+  .container{width:min(100% - 32px,720px)}
+  .nav{height:68px}
+  header.scrolled .nav{height:62px}
+  .brand{min-width:0;gap:8px}
+  .brand strong{font-size:clamp(.9rem,3.5vw,1.2rem);letter-spacing:.06em}
+  .brand small{font-size:.52rem;letter-spacing:.2em}
+  .brand .logo-box{height:38px}
+  .nav-actions{gap:7px}
+  .hero-grid{padding:38px 0 46px;gap:20px}
+  .hero-art{width:min(260px,65vw)}
+  .hero-art .hero-logo{max-height:210px}
+  .hero h2{font-size:clamp(2rem,7vw,3.2rem);line-height:1.04}
+  .hero p.lead{font-size:1rem}
+  section{padding:64px 0}
+  .sec-head{gap:14px;margin-bottom:30px}
+  .sec-head h3{font-size:clamp(2rem,6vw,2.8rem)}
+  .cat-grid,.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .contact-grid,.about-grid,.faq-grid{gap:28px}
+  .payment-grid{grid-template-columns:1fr;gap:14px;padding:18px}
+  .payment-modal{width:min(680px,100%);max-height:92dvh}
+}
+@media(max-width:600px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden}
+  .container{width:calc(100% - 28px);max-width:100%}
+  .topbar{font-size:.68rem;line-height:1.4;padding:8px 9px}
+  .nav{height:62px;gap:6px}
+  header.scrolled .nav{height:58px}
+  .brand{gap:6px}
+  .brand .logo-box{height:32px}
+  .brand .logo-box img{max-width:48px}
+  .brand strong{font-size:clamp(.78rem,3.5vw,1rem);letter-spacing:.035em;white-space:nowrap}
+  .brand small{font-size:.45rem;letter-spacing:.12em;white-space:nowrap}
+  .burger{width:38px;height:38px}
+  .cart-btn{padding:8px 10px;gap:6px;font-size:.72rem}
+  .cart-btn .n{min-width:19px;height:19px;font-size:.66rem}
+  nav{width:min(82vw,290px);padding:88px 24px}
+  .hero-grid{padding:30px 0 38px;gap:16px}
+  .hero-art{width:min(190px,52vw)}
+  .hero-art .hero-logo{max-height:165px}
+  .eyebrow-pill{font-size:.62rem;letter-spacing:.16em;margin-bottom:14px}
+  .hero h2{font-size:clamp(1.85rem,8.8vw,2.65rem);margin-bottom:15px}
+  .hero p.lead{font-size:.9rem;line-height:1.55;margin-bottom:20px}
+  .btns{gap:9px}
+  .btns .btn{flex:1 1 100%;padding:13px 17px;font-size:.82rem}
+  section{padding:48px 0}
+  .sec-head{margin-bottom:24px}
+  .sec-head h3,.faq-intro h3{font-size:clamp(1.8rem,8vw,2.25rem)}
+  .sec-head p{font-size:.86rem}
+  .cat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .cat{min-width:0;min-height:174px;padding:14px 12px}
+  .cat .ico{width:42px;height:42px}
+  .cat h4{font-size:1.12rem}
+  .cat p{font-size:.7rem}
+  .trust-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .trust-item{padding:16px 8px;min-width:0}
+  .trust-item strong{font-size:.78rem}
+  .trust-item span{font-size:.68rem}
+  .pills{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px}
+  .pill{padding:8px 12px;font-size:.72rem}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .card{min-width:0;border-radius:14px}
+  .card-img{aspect-ratio:1/.88}
+  .card-body{padding:10px 9px 11px;gap:5px}
+  .card-body h4{font-size:.78rem;line-height:1.25}
+  .card-body p{font-size:.68rem;line-height:1.35}
+  .price{font-size:1.25rem}
+  .add{font-size:.68rem;padding:9px 6px}
+  .ask{width:34px;height:34px;flex-shrink:0}
+  .sw{align-items:flex-start;flex-direction:column}
+  .sw select{width:100%}
+  .group-head h4{font-size:1.35rem}
+  .group-head .gi{width:38px;height:38px}
+  .cta-box{padding:30px 18px;margin-bottom:48px}
+  .cta-box h3{font-size:1.7rem}
+  .story-grid{gap:28px}
+  .story-text h3{font-size:2.15rem}
+  .story-text p{font-size:.9rem}
+  .story-facts{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+  .fact{padding:11px 6px}
+  .fact b{font-size:1rem}
+  .fact span{font-size:.62rem}
+  .contact-grid{grid-template-columns:minmax(0,1fr)}
+  form.contact-form{padding:19px 15px;border-radius:18px}
+  form.contact-form h4{font-size:1.6rem}
+  .info{padding:13px}
+  .info span{font-size:.82rem;overflow-wrap:anywhere}
+  .foot{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 14px}
+  .foot>div{min-width:0}
+  .foot>div:first-child,.foot>div:last-child{grid-column:1/-1}
+  .copy{padding-bottom:88px;font-size:.68rem}
+  .wa{right:12px;bottom:14px;padding:12px}
+  .top{left:12px;bottom:14px;width:42px;height:42px}
+  .modal-wrap{padding:0}
+  .modal{width:100%;max-height:94dvh;overflow-y:auto}
+  .m-img{min-height:155px}
+  .m-body{padding:19px 16px 24px}
+  .m-body h3{font-size:1.7rem}
+  .payment-wrap{padding:0;align-items:end}
+  .payment-modal{width:100%;max-height:96dvh;border-radius:20px 20px 0 0}
+  .payment-head{padding:17px 16px;border-radius:20px 20px 0 0}
+  .payment-head h3{font-size:1.55rem}
+  .payment-grid{padding:12px;gap:10px}
+  .payment-section{padding:15px;border-radius:15px}
+  .payment-section h4{font-size:1.35rem}
+  .payment-section>p{font-size:.76rem;margin-bottom:12px}
+}
+@media(max-width:380px){
+  .brand strong{font-size:.72rem}
+  .brand small{font-size:.4rem}
+  .cart-btn{padding:7px 8px}
+  .grid{gap:7px}
+  .card-body{padding:9px 8px}
+  .card-body h4{font-size:.73rem}
+  .add{font-size:.64rem}
+  .story-facts{grid-template-columns:1fr}
+}
+
 </style>
 <noscript><style>.hz,.reveal{opacity:1!important;transform:none!important}#splash{display:none}</style></noscript>
 </head>
@@ -742,6 +889,30 @@ nav a.btn::after{display:none}
   <div class="sub">Fe &nbsp;·&nbsp; Tradición &nbsp;·&nbsp; Israel</div>
   <div class="bar"><i></i></div>
 </div>
+<script>
+/* Entrada rápida e independiente de la carga de imágenes y vídeos. */
+(function () {
+  function showPage() {
+    document.body.classList.add("ready");
+    var splash = document.getElementById("splash");
+    if (splash) {
+      splash.classList.add("hide");
+      window.setTimeout(function () {
+        if (splash && splash.parentNode) splash.parentNode.removeChild(splash);
+      }, 450);
+    }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () {
+      window.setTimeout(showPage, 350);
+    }, { once: true });
+  } else {
+    window.setTimeout(showPage, 350);
+  }
+  /* Respaldo: nunca dejar la pantalla de entrada bloqueando la web. */
+  window.setTimeout(showPage, 1800);
+})();
+</script>
 
 <div id="progress"></div>
 <div class="topbar">Haz tu pedido directo por <b>WhatsApp</b> · Atención personalizada</div>
@@ -1110,8 +1281,7 @@ nav a.btn::after{display:none}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/css/intlTelInput.css">
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/intlTelInput.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.1/build/js/utils.js"></script>
-<script>
-  <script type="application/ld+json">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
@@ -1120,6 +1290,7 @@ nav a.btn::after{display:none}
   "url": "https://shofarbenelsalem.github.io/Shofar-Benelsalem/"
 }
 </script>
+<script>
 /* =====================================================
    ⚙️ CONFIGURACIÓN — AQUÍ CAMBIAS TUS DATOS
    ===================================================== */
@@ -2774,12 +2945,12 @@ function startReveal() {
   els.forEach(e => io.observe(e));
 }
 
-// Pantalla de entrada
-window.addEventListener("load", () => {
-  setTimeout(() => document.body.classList.add("ready"), 2400);
-  setTimeout(() => $("#splash").classList.add("hide"), 2800);
-});
-setTimeout(() => document.body.classList.add("ready"), 5000);
+// Pantalla de entrada: respaldo rápido; no espera a que terminen de cargar las fotos.
+document.body.classList.add("ready");
+setTimeout(() => {
+  const splash = document.getElementById("splash");
+  if (splash) splash.classList.add("hide");
+}, 900);
 
 // Cinta animada de categorías
 (function () {
@@ -2955,6 +3126,3 @@ startReveal();
   });
 })();
 </script>
-
-</body>
-</html>
