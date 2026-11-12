@@ -218,6 +218,10 @@ button,a,.card-img,.card-body h4{-webkit-tap-highlight-color:transparent}
 }
 .deliv svg{flex-shrink:0}
 .card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+.price-sale{display:inline-flex;align-items:center;gap:7px;flex-wrap:wrap;font-family:var(--sans,Arial,sans-serif)}
+.price-sale del{font-size:.82rem;color:#8b8585;font-weight:500}
+.price-sale strong{font-family:var(--serif);font-size:1.45rem;color:#b32655;font-weight:800;line-height:1}
+.price-sale small{display:inline-block;padding:4px 7px;border-radius:20px;background:#ffe5ec;color:#a51d49;font-size:.65rem;font-weight:800;letter-spacing:.04em}
 .price{font-family:var(--serif);font-weight:700;font-size:1.7rem;color:var(--ink);line-height:1}
 .add{display:flex;align-items:center;gap:6px;background:var(--ink);color:#fff;padding:11px 18px;border-radius:50px;font-size:.8rem;font-weight:700;transition:background .2s,transform .2s}
 .add svg{width:14px;height:14px}
@@ -1429,7 +1433,7 @@ const PRODUCTS = [
   /* ---- Libros (fotos: libro1.jpeg ... libro7.jpeg) ---- */
   { id: 701, cat: "libros", name: "Biblia león de juda Reina Valera 1960", desc: "Biblia Reina Valera 1960 con diseño del León de Judá.", price: 80, img: "libro7.jpeg", orient: false },
   { id: 702, cat: "libros", name: "Biblia león de juda 3D Reina Valera 1960", desc: "Biblia Reina Valera 1960 con diseño 3D del León de Judá.", price: 100, img: "libro6.jpeg", orient: false },
-  { id: 703, cat: "libros", name: "Sidur Tehilat Hashem español - Hebreo", desc: "Sidur Tehilat Hashem en español y hebreo.", price: 150, img: "libre5.jpeg", orient: false },
+  { id: 703, cat: "libros", name: "Sidur Tehilat Hashem español - Hebreo", desc: "Sidur Tehilat Hashem en español y hebreo.", price: 150, img: "libro5.jpeg", orient: false },
   { id: 704, cat: "libros", name: "Los salmos en hebreo - Español (Interlineal)", desc: "Libro de los Salmos en formato interlineal hebreo-español.", price: 170, img: "libro4.jpeg", orient: false },
   { id: 705, cat: "libros", name: "Toráh emet", desc: "Toráh emet.", price: 220, img: "libro1.jpeg", orient: false },
   { id: 706, cat: "libros", name: "Biblia hebrea - Español Sefer davar alef tav", desc: "Biblia hebrea en español: Sefer davar alef tav.", price: 250, img: "libro2.jpeg", orient: false },
@@ -1493,6 +1497,10 @@ document.querySelectorAll("[data-icon]").forEach(el => { el.innerHTML = icon(el.
 
 const $ = (s) => document.querySelector(s);
 const money = (n) => CONFIG.moneda + Number(n).toFixed(2);
+// Descuento general del 10% aplicado a todos los productos del catálogo.
+const DISCOUNT_RATE = 0.10;
+const salePrice = (price) => Math.round(Number(price) * (1 - DISCOUNT_RATE) * 100) / 100;
+const priceHTML = (price) => '<span class="price-sale"><del>' + money(price) + '</del><strong>' + money(salePrice(price)) + '</strong><small>10% OFF</small></span>';
 const catOf = (id) => CATEGORIES.find(c => c.id === id) || {};
 let activeCat = "todos";
 let query = "";
@@ -2019,7 +2027,7 @@ function cardHTML(p0, i) {
     '<div class="card-body"><h4 data-open="' + p.id + '">' + p.name + '</h4><p>' + p.desc + '</p>' +
     (p.colores ? '<div class="sw">' + swHTML(p) + '</div>' : '') +
     '<span class="deliv">' + icon("clock", 14, 2.2) + ENTREGA + '</span>' +
-    '<div class="card-foot"><span class="price">' + money(p.price) + '</span><div class="card-actions"><button class="ask" data-ask="' + p.id + '" aria-label="Consultar por WhatsApp" title="Consultar por WhatsApp">' + icon("chat", 18, 1.8) + '</button><button class="add" data-add="' + p.id + '">' + icon("plus", 14, 3) + ' Agregar</button></div></div></div>' +
+    '<div class="card-foot">' + priceHTML(p.price) + '<div class="card-actions"><button class="ask" data-ask="' + p.id + '" aria-label="Consultar por WhatsApp" title="Consultar por WhatsApp">' + icon("chat", 18, 1.8) + '</button><button class="add" data-add="' + p.id + '">' + icon("plus", 14, 3) + ' Agregar</button></div></div></div>' +
   '</article>';
 }
 function renderProducts() {
@@ -2047,7 +2055,7 @@ $("#products").addEventListener("click", (e) => {
   b = t.closest("[data-ask]");
   if (b) {
     const p0 = PRODUCTS.find(x => x.id === Number(b.dataset.ask));
-    if (p0) { const p = variant(p0); window.open(waLink("Hola, es un gusto saludarles. Estoy interesado(a) en el siguiente producto: " + p.name + " (" + money(p.price) + "). ¿Podrían confirmarme su disponibilidad y el costo de envío a mi país?"), "_blank"); }
+    if (p0) { const p = variant(p0); window.open(waLink("Hola, es un gusto saludarles. Estoy interesado(a) en el siguiente producto: " + p.name + " (" + money(salePrice(p.price)) + "). ¿Podrían confirmarme su disponibilidad y el costo de envío a mi país?"), "_blank"); }
     return;
   }
   b = t.closest("[data-more]");
@@ -2106,10 +2114,10 @@ function renderCart() {
     const p0 = PRODUCTS.find(x => x.id === i.id);
     if (!p0) return "";
     const p = variant(p0, i.c);
-    total += p.price * i.qty;
+    total += salePrice(p.price) * i.qty;
     const ref = p.id + "|" + (i.c || "");
     return '<div class="item"><div class="em' + (p.img ? ' has-img' : '') + '">' + (p.img ? photo(p, "") : icon(catOf(p.cat).icon, 30, 1.4)) + '</div>' +
-      '<div class="t"><strong>' + p.name + '</strong><span>' + money(p.price) + '</span></div>' +
+      '<div class="t"><strong>' + p.name + '</strong>' + priceHTML(p.price) + '</div>' +
       '<div class="qty"><button data-minus="' + ref + '">−</button><b>' + i.qty + '</b><button data-plus="' + ref + '">+</button></div></div>';
   }).join("");
   $("#cartTotal").textContent = money(total);
@@ -2154,9 +2162,9 @@ function orderData() {
     const p0 = PRODUCTS.find(x => x.id === i.id);
     if (!p0) return;
     const p = variant(p0, i.c);
-    const subtotal = p.price * i.qty;
+    const subtotal = salePrice(p.price) * i.qty;
     total += subtotal;
-    items.push({ qty:i.qty, name:p.name, price:p.price, subtotal:subtotal });
+    items.push({ qty:i.qty, name:p.name, price:salePrice(p.price), originalPrice:p.price, subtotal:subtotal });
   });
   return { items, total };
 }
@@ -3021,7 +3029,7 @@ function fillModal() {
   } else { note.innerHTML = ""; }
   note.innerHTML += '<div>' + icon("clock", 18, 2) + '<span>' + ENTREGA + '</span></div>';
   note.hidden = false;
-  $("#mPrice").textContent = money(p.price);
+  $("#mPrice").innerHTML = priceHTML(p.price);
 }
 function closeProduct() {
   $("#modal").classList.remove("open");
@@ -3034,7 +3042,7 @@ $("#mMinus").addEventListener("click", () => { mQty = Math.max(1, mQty - 1); $("
 $("#mPlus").addEventListener("click", () => { mQty = Math.min(99, mQty + 1); $("#mQty").textContent = mQty; });
 $("#mAdd").addEventListener("click", () => { if (mProd) { addToCart(mProd.id, mQty, curColor(mProd)); closeProduct(); } });
 $("#mAsk").addEventListener("click", () => {
-  if (mProd) window.open(waLink("Hola, es un gusto saludarles. Estoy interesado(a) en el siguiente producto: " + variant(mProd).name + " (" + money(mProd.price) + "), cantidad: " + mQty + ". ¿Podrían confirmarme su disponibilidad y el costo de envío a mi país?"), "_blank");
+  if (mProd) window.open(waLink("Hola, es un gusto saludarles. Estoy interesado(a) en el siguiente producto: " + variant(mProd).name + " (" + money(salePrice(variant(mProd).price)) + "), cantidad: " + mQty + ". ¿Podrían confirmarme su disponibilidad y el costo de envío a mi país?"), "_blank");
 });
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") { closeProduct(); closePayment(); openCart(false); toggleMenu(false); }
