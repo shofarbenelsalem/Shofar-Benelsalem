@@ -882,16 +882,13 @@ nav a.btn::after{display:none}
 
 
 
-/* ---------- Carrusel de combos ---------- */
+/* ---------- Combos ---------- */
 .combos-section{background:linear-gradient(180deg,#f7f9fe,#fff);padding:82px 0}
 .combos-head{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;margin-bottom:30px}
 .combos-head .kicker{font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;color:var(--royal);font-weight:800;margin-bottom:12px}
 .combos-head h3{font-family:var(--serif);font-size:clamp(2.1rem,4.5vw,3.2rem);line-height:1.05;color:var(--ink);font-weight:600}
-.combos-controls{display:flex;gap:9px;flex-shrink:0}
-.combos-controls button{width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--royal);font-size:1.35rem;display:grid;place-items:center;transition:.2s}
-.combos-controls button:hover{background:var(--royal);border-color:var(--royal);color:#fff}
-.combos-track{display:grid;grid-auto-flow:column;grid-auto-columns: minmax(260px, 1fr);grid-auto-columns:minmax(280px,calc((100% - 40px)/3));gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:var(--royal) var(--ice);padding:4px 2px 18px;scroll-behavior:smooth}
-.combo-card{min-width:0;scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 12px 30px rgba(10,23,48,.08);transition:transform .3s,box-shadow .3s}
+.combos-track{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.combo-card{min-width:0;background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:0 12px 30px rgba(10,23,48,.08);transition:transform .3s,box-shadow .3s}
 .combo-card:hover{transform:translateY(-5px);box-shadow:0 20px 42px rgba(10,23,48,.14)}
 .combo-photo{aspect-ratio:1.22/1;background:#f3f6fc;overflow:hidden}
 .combo-photo img{width:100%;height:100%;object-fit:cover}
@@ -900,8 +897,10 @@ nav a.btn::after{display:none}
 .combo-info h4{font-family:var(--serif);font-size:1.65rem;line-height:1.1;color:var(--ink);margin:7px 0 9px}
 .combo-info p{font-size:.9rem;line-height:1.55;color:var(--muted);min-height:2.8em}
 .combo-price{display:block;margin-top:14px;font-family:var(--serif);font-size:1.9rem;font-weight:700;color:var(--ink)}
-@media(max-width:760px){.combos-section{padding:64px 0}.combos-track{grid-auto-columns:minmax(250px,78%)}.combos-head{align-items:center}}
-@media(max-width:420px){.combos-track{grid-auto-columns:88%}.combo-info{padding:18px}.combos-controls button{width:38px;height:38px}}
+.combo-add{width:100%;margin-top:16px;border:0;border-radius:50px;padding:12px 18px;background:var(--royal);color:#fff;font-weight:800;font-size:.9rem;cursor:pointer;transition:background .2s,transform .2s}
+.combo-add:hover{background:#1f4fc0;transform:translateY(-2px)}
+@media(max-width:760px){.combos-section{padding:64px 0}.combos-track{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.combos-track{grid-template-columns:1fr}.combo-info{padding:18px}}
 
 </style>
 <noscript><style>.hz,.reveal{opacity:1!important;transform:none!important}#splash{display:none}</style></noscript>
@@ -1024,41 +1023,27 @@ nav a.btn::after{display:none}
 <div class="marquee" aria-hidden="true"><div class="mq-track" id="mq"></div></div>
 
 <!-- ============ COMBOS ============ -->
-<section class="combos-section" id="combos" aria-label="Carrusel de combos especiales">
+<section class="combos-section" id="combos" aria-label="Combos disponibles">
   <div class="container">
     <div class="combos-head reveal">
       <div><div class="kicker">Selección especial</div><h3>Nuestros combos</h3></div>
-      <div class="combos-controls" aria-label="Controles del carrusel">
-        <button type="button" class="combo-prev" aria-label="Ver combos anteriores">‹</button>
-        <button type="button" class="combo-next" aria-label="Ver más combos">›</button>
-      </div>
     </div>
-    <div class="combos-track" id="combosTrack" tabindex="0" aria-label="Desliza para explorar los combos">
+    <div class="combos-track" id="combosTrack">
       <article class="combo-card">
         <div class="combo-photo"><img src="combo1.jpeg" alt="Combo Promoción Salomón: tallit y shofar de carnero" loading="lazy"></div>
-        <div class="combo-info"><span class="combo-label">Combo 01</span><h4>Promoción Salomón</h4><p>Tallit y shofar de carnero.</p><strong class="combo-price">$199</strong></div>
+        <div class="combo-info"><span class="combo-label">Combo 01</span><h4>Promoción Salomón</h4><p>Tallit y shofar de carnero.</p><strong class="combo-price">$199</strong><button type="button" class="combo-add" data-combo-add="-1">＋ Agregar al carrito</button></div>
       </article>
       <article class="combo-card">
         <div class="combo-photo"><img src="combo2.jpeg" alt="Combo Promoción Tabernáculo: Arca del pacto y menorah" loading="lazy"></div>
-        <div class="combo-info"><span class="combo-label">Combo 02</span><h4>Promoción Tabernáculo</h4><p>Arca del pacto y menorah.</p><strong class="combo-price">$120</strong></div>
+        <div class="combo-info"><span class="combo-label">Combo 02</span><h4>Promoción Tabernáculo</h4><p>Arca del pacto y menorah.</p><strong class="combo-price">$120</strong><button type="button" class="combo-add" data-combo-add="-2">＋ Agregar al carrito</button></div>
       </article>
       <article class="combo-card">
         <div class="combo-photo"><img src="combo3.jpeg" alt="Combo Promoción David: cuerno de unción plata y aceite de oliva de 300 ML" loading="lazy"></div>
-        <div class="combo-info"><span class="combo-label">Combo 03</span><h4>Promoción David</h4><p>Cuerno de unción plata y aceite de oliva de 300 ML.</p><strong class="combo-price">$285</strong></div>
+        <div class="combo-info"><span class="combo-label">Combo 03</span><h4>Promoción David</h4><p>Cuerno de unción plata y aceite de oliva de 300 ML.</p><strong class="combo-price">$285</strong><button type="button" class="combo-add" data-combo-add="-3">＋ Agregar al carrito</button></div>
       </article>
     </div>
   </div>
 </section>
-<script>
-(function(){
-  const track=document.getElementById('combosTrack');
-  if(!track)return;
-  const step=()=>{const card=track.querySelector('.combo-card');return card?card.getBoundingClientRect().width+20:300;};
-  document.querySelector('.combo-prev')?.addEventListener('click',()=>track.scrollBy({left:-step(),behavior:'smooth'}));
-  document.querySelector('.combo-next')?.addEventListener('click',()=>track.scrollBy({left:step(),behavior:'smooth'}));
-})();
-</script>
-
 
 <!-- ============ CATEGORÍAS ============ -->
 <section class="cats" id="categorias">
@@ -1595,10 +1580,15 @@ function swHTML(p) {
     p.colores.map(c => '<option value="' + c.k + '"' + (c.k === cur ? ' selected' : '') + '>' + c.t + '</option>').join("") +
     '</select>';
 }
+const COMBOS = {
+  "-1": { id:-1, name:"Promoción Salomón", price:199, img:"combo1.jpeg" },
+  "-2": { id:-2, name:"Promoción Tabernáculo", price:120, img:"combo2.jpeg" },
+  "-3": { id:-3, name:"Promoción David", price:285, img:"combo3.jpeg" }
+};
 const sameItem = (i, id, c) => i.id === id && (i.c || "") === (c || "");
 
 try { cart = JSON.parse(localStorage.getItem("sb_cart2") || "[]"); } catch (e) { cart = []; }
-cart = cart.filter(i => { const p = PRODUCTS.find(x => x.id === i.id); return p && (!p.colores || p.colores.some(c => c.k === i.c)); });
+cart = cart.filter(i => COMBOS[String(i.id)] || (() => { const p = PRODUCTS.find(x => x.id === i.id); return p && (!p.colores || p.colores.some(c => c.k === i.c)); })());
 function saveCart() { try { localStorage.setItem("sb_cart2", JSON.stringify(cart)); } catch (e) {} }
 
 $("#infoWa").textContent = CONFIG.whatsappVisible;
@@ -2154,6 +2144,9 @@ function addToCart(id, n, c) {
   badge.classList.remove("bump"); void badge.offsetWidth; badge.classList.add("bump");
   toast("Agregado al carrito");
 }
+document.querySelectorAll("[data-combo-add]").forEach(button => {
+  button.addEventListener("click", () => addToCart(Number(button.dataset.comboAdd), 1, ""));
+});
 function changeQty(id, d, c) {
   const it = cart.find(i => sameItem(i, id, c));
   if (!it) return;
@@ -2171,13 +2164,17 @@ function renderCart() {
   }
   let total = 0;
   $("#cartItems").innerHTML = cart.map(i => {
-    const p0 = PRODUCTS.find(x => x.id === i.id);
+    const combo = COMBOS[String(i.id)];
+    const p0 = combo || PRODUCTS.find(x => x.id === i.id);
     if (!p0) return "";
-    const p = variant(p0, i.c);
-    total += salePrice(p.price) * i.qty;
+    const p = combo || variant(p0, i.c);
+    const unitPrice = combo ? p.price : salePrice(p.price);
+    total += unitPrice * i.qty;
     const ref = p.id + "|" + (i.c || "");
-    return '<div class="item"><div class="em' + (p.img ? ' has-img' : '') + '">' + (p.img ? photo(p, "") : icon(catOf(p.cat).icon, 30, 1.4)) + '</div>' +
-      '<div class="t"><strong>' + p.name + '</strong>' + priceHTML(p.price) + '</div>' +
+    const itemPhoto = p.img ? '<img src="' + p.img + '" alt="' + p.name + '" style="width:100%;height:100%;object-fit:cover;border-radius:10px">' : icon(catOf(p.cat).icon, 30, 1.4);
+    const shownPrice = combo ? '<strong>' + money(p.price) + '</strong>' : priceHTML(p.price);
+    return '<div class="item"><div class="em' + (p.img ? ' has-img' : '') + '">' + itemPhoto + '</div>' +
+      '<div class="t"><strong>' + p.name + '</strong>' + shownPrice + '</div>' +
       '<div class="qty"><button data-minus="' + ref + '">−</button><b>' + i.qty + '</b><button data-plus="' + ref + '">+</button></div></div>';
   }).join("");
   $("#cartTotal").textContent = money(total);
@@ -2219,12 +2216,14 @@ function orderData() {
   let total = 0;
   const items = [];
   cart.forEach(i => {
-    const p0 = PRODUCTS.find(x => x.id === i.id);
+    const combo = COMBOS[String(i.id)];
+    const p0 = combo ? combo : PRODUCTS.find(x => x.id === i.id);
     if (!p0) return;
-    const p = variant(p0, i.c);
-    const subtotal = salePrice(p.price) * i.qty;
+    const p = combo ? combo : variant(p0, i.c);
+    const unitPrice = combo ? p.price : salePrice(p.price);
+    const subtotal = unitPrice * i.qty;
     total += subtotal;
-    items.push({ qty:i.qty, name:p.name, price:salePrice(p.price), originalPrice:p.price, subtotal:subtotal });
+    items.push({ qty:i.qty, name:p.name, price:unitPrice, originalPrice:p.price, subtotal:subtotal });
   });
   return { items, total };
 }
