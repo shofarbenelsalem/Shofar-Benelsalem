@@ -1382,6 +1382,7 @@ const CATEGORIES = [
   { id: "menorah",    name: "Menorah",             icon: "menora",   desc: "Menorah en distintos acabados y combinaciones de color." },
   { id: "arca",       name: "Arca Del Pacto",      icon: "arca",     desc: "Arcas del Pacto en tamaños pequeño, mediano y grande." },
   { id: "libros",     name: "Libros",              icon: "libro",    desc: "Biblias, libros y textos en hebreo y español." },
+  { id: "joyas",      name: "Joyas",               icon: "star",     desc: "Anillos, collares y accesorios para hombre y mujer." },
 ];
 
 /* =====================================================
@@ -1408,6 +1409,7 @@ const PRODUCTS = [
   { id: 113, cat: "cuernos", name: "Shofar Eland Yemenita 18-27 pulgadas", desc: "Medida: 18 a 27 pulgadas.", price: 200, img: "shofares13.jpeg" },
   { id: 114, cat: "cuernos", name: "Shofar Antílope de Agua 15-23 pulgadas", desc: "Medida: 15 a 23 pulgadas.", price: 230, img: "shofares14.jpeg" },
   { id: 115, cat: "cuernos", name: "Shofar Sable Yemenita 18-21 pulgadas", desc: "Medida: 18 a 21 pulgadas.", price: 250, img: "shofares15.jpeg" },
+  { id: 116, cat: "cuernos", name: "Shofar 40-44 pulgadas", desc: "Medida: 40 a 44 pulgadas.", price: 375, img: "shofares16.jpeg" },
 
   /* ---- Cuernos de Unción (fotos: cuerno1.jpeg ... cuerno3.jpeg) ---- */
   { id: 201, cat: "uncion", name: "Cuerno de Unción de Plata Menorah 13 pulgadas",          desc: "Cuerno de unción en plata con diseño de Menorá. Medida: 13 pulgadas.",           price: 250, img: "cuerno1.jpeg", anchor: true, mirror: true, invertir: true, huecos: true },
@@ -1484,6 +1486,42 @@ const PRODUCTS = [
   { id: 706, cat: "libros", name: "Biblia hebrea - Español Sefer davar alef tav", desc: "Biblia hebrea en español: Sefer davar alef tav.", price: 250, img: "libro2.jpeg", orient: false },
   { id: 707, cat: "libros", name: "Biblia tanaj", desc: "Biblia Tanaj.", price: 250, img: "libro3.jpeg", orient: false },
 
+  /* ---- Joyas ---- */
+  { id: 801, cat: "joyas", name: "Anillo hebreo de plata Ani l dodi v dodi li", desc: "Anillo hebreo de plata personalizado con la frase “Ani l dodi v dodi li”. Oferta especial: par por $250.", price: 150, img: "anillo1.jpeg", tallas: true , sinDescuento: true},
+  { id: 802, cat: "joyas", price: 50, desc: "Collar Estrella de David y Menorá para mujeres. Disponible en dorado y plata.", orient: false,
+    nombre: (c) => "Collar estrella de David y Menorá para mujeres " + c,
+    colores: [
+      { k: "dorado", n: "dorado", t: "Dorado", img: "Collar estrella de david dorado.jpeg" },
+      { k: "plata", n: "plata", t: "Plata", img: "Collar estrella de david plata.jpeg" }
+    ] },
+  { id: 803, cat: "joyas", name: "Collar estrella de David para mujer", desc: "Collar Estrella de David para mujer.", price: 40, img: "Collar estrella de david para mujeres.jpeg" , sinDescuento: true},
+  { id: 804, cat: "joyas", price: 50, desc: "Collar Estrella de David para hombre. Disponible en dorado y plata.", orient: false,
+    nombre: (c) => "Collar Estrella de David para hombre " + c,
+    colores: [
+      { k: "dorado", n: "dorado", t: "Dorado", img: "Collar Estrella de David para hombre dorado.jpeg" },
+      { k: "plata", n: "plata", t: "Plata", img: "Collar Estrella de David para hombre plata.jpeg" }
+    ] },
+  { id: 805, cat: "joyas", name: "Anillo estrella de David para hombre", desc: "Anillo Estrella de David para hombre.", price: 45, img: "Anillo estrella de david para hombre.jpeg", tallas: true , sinDescuento: true},
+  { id: 806, cat: "joyas", name: "Anillo estrella de David para hombre", desc: "Anillo Estrella de David para hombre.", price: 50, img: "Anillo estrella de david para hombre 1.jpeg", tallas: true , sinDescuento: true},
+  { id: 807, cat: "joyas", price: 48, desc: "Anillo de águila para hombre. Disponible en dorado y plata.", orient: false, tallas: true,
+    nombre: (c) => "Anillo de águila para hombre " + c,
+    colores: [
+      { k: "dorado", n: "dorado", t: "Dorado", img: "Anillo de aguila para hombre dorado.jpeg"},
+      { k: "plata", n: "plata", t: "Plata", img: "Anillo de aguila para hombre plata.jpeg" }
+    ], sinDescuento: true },
+  { id: 808, cat: "joyas", price: 40, desc: "Anillos Real para hombre. Selecciona el color y la talla.", tallas: true,
+    nombre: (c) => "Anillos Real " + c + " para hombre",
+    colores: [
+      { k: "negro", n: "Negro", t: "Negro", img: "Anillos Real Negro.jpeg"},
+      { k: "azul", n: "Azul", t: "Azul", img: "Anillos Real Azul.jpeg" },
+      { k: "verde", n: "Verde", t: "Verde", img: "Anillos Real Verde.jpeg" },
+      { k: "rojo", n: "Rojo", t: "Rojo", img: "Anillos Real Rojo.jpeg" }
+    ], sinDescuento: true },
+  { id: 809, cat: "joyas", name: "Collar con medalla YHWH", desc: "Collar con medalla YHWH.", price: 40, img: "Collar con medalla YHWH.jpeg" , sinDescuento: true},
+  { id: 810, cat: "joyas", name: "Anillo giratorio plata ley 925 con el Shemá Israel", desc: "Anillo giratorio de plata ley 925 con el Shemá Israel.", price: null, img: "Anillo giratorio plata.jpeg", tallas: true },
+  { id: 811, cat: "joyas", name: "Anillo estrella de David plata ley 925", desc: "Anillo Estrella de David de plata ley 925 texturizado. Incluye caja gratis.", price: null, img: "Anillo estrella de david plata.jpeg", tallas: true },
+  { id: 812, cat: "joyas", name: "Sarcillos estrella de David dorado para mujer", desc: "Sarcillos Estrella de David dorados para mujer.", price: 40, img: "Sarcillos estrella de david dorado para mujer.jpeg" , sinDescuento: true},
+
   /* =====================================================
      PRODUCTOS ANTERIORES DE "ARTÍCULOS DE FE" Y "LIBRERÍA"
      Se conservan aquí como referencia, pero están desactivados porque
@@ -1544,8 +1582,8 @@ const $ = (s) => document.querySelector(s);
 const money = (n) => CONFIG.moneda + Number(n).toFixed(2);
 // Descuento general del 10% aplicado a todos los productos del catálogo.
 const DISCOUNT_RATE = 0.10;
-const salePrice = (price) => Math.round(Number(price) * (1 - DISCOUNT_RATE) * 100) / 100;
-const priceHTML = (price) => '<span class="price-sale"><del>' + money(price) + '</del><strong>' + money(salePrice(price)) + '</strong><small>10% OFF</small></span>';
+const salePrice = (price, sinDescuento) => sinDescuento ? Number(price) : Math.round(Number(price) * (1 - DISCOUNT_RATE) * 100) / 100;
+const priceHTML = (price, sinDescuento) => sinDescuento ? '<span class="price">' + money(price) + '</span>' : '<span class="price-sale"><del>' + money(price) + '</del><strong>' + money(salePrice(price)) + '</strong><small>10% OFF</small></span>';
 const catOf = (id) => CATEGORIES.find(c => c.id === id) || {};
 let activeCat = "todos";
 let query = "";
@@ -1553,6 +1591,14 @@ let cart = [];
 
 // Productos con colores (Tallit): cada color es una "variante" con su foto y su nombre
 const SEL = {};   // id de producto -> color elegido
+const SEL_SIZE = {};
+const RING_SIZES = ["7", "8", "9", "10", "11", "12"];
+function curSize(p) { return SEL_SIZE[p.id] || RING_SIZES[0]; }
+function sizeHTML(p, mobile) {
+  if (!p.tallas) return "";
+  return '<div class="sw' + (mobile ? ' m-sw' : '') + '"><label for="size-' + p.id + '">Talla</label><select id="size-' + p.id + '" data-size="' + p.id + '" aria-label="Seleccionar talla del anillo">' +
+    RING_SIZES.map(n => '<option value="' + n + '"' + (n === curSize(p) ? ' selected' : '') + '>Anillo ' + n + '</option>').join("") + '</select></div>';
+}
 PRODUCTS.forEach(p => { if (p.colores) p.name = p.nombre(p.colores[0].n); });
 function curColor(p) { return p.colores ? (SEL[p.id] || p.colores[0].k) : ""; }
 function variant(p, k) {
@@ -1585,7 +1631,7 @@ const COMBOS = {
   "-2": { id:-2, name:"Promoción Tabernáculo", price:120, img:"combo2.jpeg" },
   "-3": { id:-3, name:"Promoción David", price:285, img:"combo3.jpeg" }
 };
-const sameItem = (i, id, c) => i.id === id && (i.c || "") === (c || "");
+const sameItem = (i, id, c, t) => i.id === id && (i.c || "") === (c || "") && (i.t || "") === (t || "");
 
 try { cart = JSON.parse(localStorage.getItem("sb_cart2") || "[]"); } catch (e) { cart = []; }
 cart = cart.filter(i => COMBOS[String(i.id)] || (() => { const p = PRODUCTS.find(x => x.id === i.id); return p && (!p.colores || p.colores.some(c => c.k === i.c)); })());
@@ -2075,16 +2121,16 @@ function cardHTML(p0, i) {
     (p.img ? photo(p, p.name) : '') +
     '<span class="tag">' + c.name + '</span><span class="view">Ver detalle ' + icon("arrow", 14, 2.6) + '</span></div>' +
     '<div class="card-body"><h4 data-open="' + p.id + '">' + p.name + '</h4><p>' + p.desc + '</p>' +
-    (p.colores ? '<div class="sw">' + swHTML(p) + '</div>' : '') +
+    (p.colores ? '<div class="sw">' + swHTML(p) + '</div>' : '') + sizeHTML(p, false) +
     '<span class="deliv">' + icon("clock", 14, 2.2) + ENTREGA + '</span>' +
-    '<div class="card-foot">' + priceHTML(p.price) + '<div class="card-actions"><button class="ask" data-ask="' + p.id + '" aria-label="Consultar por WhatsApp" title="Consultar por WhatsApp">' + icon("chat", 18, 1.8) + '</button><button class="add" data-add="' + p.id + '">' + icon("plus", 14, 3) + ' Agregar</button></div></div></div>' +
+          '<div class="card-foot">' + (p.price == null ? '<strong class="price">Consultar precio</strong>' : priceHTML(p.price, p.sinDescuento)) + '<div class="card-actions"><button class="ask" data-ask="' + p.id + '" aria-label="Consultar por WhatsApp" title="Consultar por WhatsApp">' + icon("chat", 18, 1.8) + '</button>' + (p.price == null ? '' : '<button class="add" data-add="' + p.id + '">' + icon("plus", 14, 3) + ' Agregar</button>') + '</div></div></div>' +
   '</article>';
 }
 function renderProducts() {
   const showAll = activeCat !== "todos" || query !== "";
   const groups = CATEGORIES
     .filter(c => activeCat === "todos" || c.id === activeCat)
-    .map(c => ({ cat: c, items: PRODUCTS.filter(p => p.cat === c.id && (p.name + " " + p.desc + " " + (p.colores ? p.colores.map(v => v.t + " " + v.n).join(" ") : "")).toLowerCase().includes(query)).sort((a, b) => (c.orden === "desc" ? b.price - a.price : a.price - b.price) || a.id - b.id) }))
+    .map(c => ({ cat: c, items: PRODUCTS.filter(p => p.cat === c.id && (p.name + " " + p.desc + " " + (p.colores ? p.colores.map(v => v.t + " " + v.n).join(" ") : "")).toLowerCase().includes(query)).sort((a, b) => (a.price == null ? 1 : b.price == null ? -1 : (c.orden === "desc" ? b.price - a.price : a.price - b.price)) || a.id - b.id) }))
     .filter(g => g.items.length);
   if (!groups.length) { $("#products").innerHTML = '<p class="empty">No encontramos productos con esa búsqueda.</p>'; return; }
   $("#products").innerHTML = groups.map(g => {
@@ -2101,11 +2147,11 @@ function renderProducts() {
 $("#products").addEventListener("click", (e) => {
   const t = e.target;
   let b = t.closest("[data-add]");
-  if (b) { const id = Number(b.dataset.add), p = PRODUCTS.find(x => x.id === id); addToCart(id, 1, p ? curColor(p) : ""); return; }
+  if (b) { const id = Number(b.dataset.add), p = PRODUCTS.find(x => x.id === id); addToCart(id, 1, p ? curColor(p) : "", p && p.tallas ? curSize(p) : ""); return; }
   b = t.closest("[data-ask]");
   if (b) {
     const p0 = PRODUCTS.find(x => x.id === Number(b.dataset.ask));
-    if (p0) { const p = variant(p0); window.open(waLink("Hola, es un gusto saludarles. Estoy interesado(a) en el siguiente producto: " + p.name + " (" + money(salePrice(p.price)) + "). ¿Podrían confirmarme su disponibilidad y el costo de envío a mi país?"), "_blank"); }
+    if (p0) { const p = variant(p0); const priceText = p.price == null ? "precio por confirmar" : money(salePrice(p.price, p.sinDescuento)); window.open(waLink("Hola, es un gusto saludarles. Estoy interesado(a) en el siguiente producto: " + p.name + (p0.tallas ? " · Talla " + curSize(p0) : "") + " (" + priceText + "). ¿Podrían confirmarme su disponibilidad y el costo de envío a mi país?"), "_blank"); }
     return;
   }
   b = t.closest("[data-more]");
@@ -2115,6 +2161,14 @@ $("#products").addEventListener("click", (e) => {
 });
 // Menús de color (en la tarjeta y en la ventana del producto)
 document.addEventListener("change", (e) => {
+  const sizeSelect = e.target.closest("select[data-size]");
+  if (sizeSelect) {
+    const id = Number(sizeSelect.dataset.size), p0 = PRODUCTS.find(x => x.id === id);
+    if (!p0) return;
+    SEL_SIZE[id] = sizeSelect.value;
+    if (mProd && mProd.id === id && $("#modal").classList.contains("open")) fillModal();
+    return;
+  }
   const b = e.target.closest("select[data-sw]");
   if (!b) return;
   const id = Number(b.dataset.sw), p0 = PRODUCTS.find(x => x.id === id);
@@ -2135,10 +2189,10 @@ document.addEventListener("change", (e) => {
 $("#search").addEventListener("input", (e) => { query = e.target.value.trim().toLowerCase(); renderProducts(); });
 
 // Carrito
-function addToCart(id, n, c) {
-  n = n || 1; c = c || "";
-  const found = cart.find(i => sameItem(i, id, c));
-  if (found) found.qty += n; else cart.push(c ? { id: id, qty: n, c: c } : { id: id, qty: n });
+function addToCart(id, n, c, t) {
+  n = n || 1; c = c || ""; t = t || "";
+  const found = cart.find(i => sameItem(i, id, c, t));
+  if (found) found.qty += n; else cart.push(Object.assign({ id: id, qty: n }, c ? { c: c } : {}, t ? { t: t } : {}));
   saveCart(); renderCart();
   const badge = $("#cartCount");
   badge.classList.remove("bump"); void badge.offsetWidth; badge.classList.add("bump");
@@ -2147,8 +2201,8 @@ function addToCart(id, n, c) {
 document.querySelectorAll("[data-combo-add]").forEach(button => {
   button.addEventListener("click", () => addToCart(Number(button.dataset.comboAdd), 1, ""));
 });
-function changeQty(id, d, c) {
-  const it = cart.find(i => sameItem(i, id, c));
+function changeQty(id, d, c, t) {
+  const it = cart.find(i => sameItem(i, id, c, t));
   if (!it) return;
   it.qty += d;
   if (it.qty <= 0) cart = cart.filter(i => i !== it);
@@ -2168,19 +2222,19 @@ function renderCart() {
     const p0 = combo || PRODUCTS.find(x => x.id === i.id);
     if (!p0) return "";
     const p = combo || variant(p0, i.c);
-    const unitPrice = combo ? p.price : salePrice(p.price);
+    const unitPrice = combo ? p.price : salePrice(p.price, p.sinDescuento);
     total += unitPrice * i.qty;
-    const ref = p.id + "|" + (i.c || "");
+    const ref = p.id + "|" + (i.c || "") + "|" + (i.t || "");
     const itemPhoto = p.img ? '<img src="' + p.img + '" alt="' + p.name + '" style="width:100%;height:100%;object-fit:cover;border-radius:10px">' : icon(catOf(p.cat).icon, 30, 1.4);
-    const shownPrice = combo ? '<strong>' + money(p.price) + '</strong>' : priceHTML(p.price);
+    const shownPrice = combo ? '<strong>' + money(p.price) + '</strong>' : priceHTML(p.price, p.sinDescuento);
     return '<div class="item"><div class="em' + (p.img ? ' has-img' : '') + '">' + itemPhoto + '</div>' +
-      '<div class="t"><strong>' + p.name + '</strong>' + shownPrice + '</div>' +
+            '<div class="t"><strong>' + p.name + '</strong>' + (i.t ? '<small>Talla: ' + i.t + '</small>' : '') + shownPrice + '</div>' +
       '<div class="qty"><button data-minus="' + ref + '">−</button><b>' + i.qty + '</b><button data-plus="' + ref + '">+</button></div></div>';
   }).join("");
   $("#cartTotal").textContent = money(total);
-  const split = (s) => { const a = s.split("|"); return [Number(a[0]), a[1] || ""]; };
-  document.querySelectorAll("[data-minus]").forEach(b => b.addEventListener("click", () => { const a = split(b.dataset.minus); changeQty(a[0], -1, a[1]); }));
-  document.querySelectorAll("[data-plus]").forEach(b => b.addEventListener("click", () => { const a = split(b.dataset.plus); changeQty(a[0], 1, a[1]); }));
+  const split = (s) => { const a = s.split("|"); return [Number(a[0]), a[1] || "", a[2] || ""]; };
+  document.querySelectorAll("[data-minus]").forEach(b => b.addEventListener("click", () => { const a = split(b.dataset.minus); changeQty(a[0], -1, a[1], a[2]); }));
+  document.querySelectorAll("[data-plus]").forEach(b => b.addEventListener("click", () => { const a = split(b.dataset.plus); changeQty(a[0], 1, a[1], a[2]); }));
 }
 function openCart(open) {
   $("#drawer").classList.toggle("open", open);
@@ -2220,10 +2274,10 @@ function orderData() {
     const p0 = combo ? combo : PRODUCTS.find(x => x.id === i.id);
     if (!p0) return;
     const p = combo ? combo : variant(p0, i.c);
-    const unitPrice = combo ? p.price : salePrice(p.price);
+    const unitPrice = combo ? p.price : salePrice(p.price, p.sinDescuento);
     const subtotal = unitPrice * i.qty;
     total += subtotal;
-    items.push({ qty:i.qty, name:p.name, price:unitPrice, originalPrice:p.price, subtotal:subtotal });
+    items.push({ qty:i.qty, name:p.name + (i.t ? " · Talla " + i.t : ""), price:unitPrice, originalPrice:p.price, subtotal:subtotal });
   });
   return { items, total };
 }
@@ -3075,8 +3129,8 @@ function fillModal() {
   const p = variant(mProd);
   const c = catOf(p.cat);
   const sw = $("#mSw");
-  sw.hidden = !p.colores;
-  sw.innerHTML = p.colores ? swHTML(mProd) : "";
+  sw.innerHTML = (p.colores ? swHTML(mProd) : "") + sizeHTML(mProd, true);
+  sw.hidden = !p.colores && !p.tallas;
   $("#mImg").innerHTML = icon(c.icon, 120, 1) + (p.img ? photo(p, p.name) : "");
   $("#mImg").classList.toggle("has-img", !!p.img);
   $("#mTag").textContent = c.name;
@@ -3088,7 +3142,8 @@ function fillModal() {
   } else { note.innerHTML = ""; }
   note.innerHTML += '<div>' + icon("clock", 18, 2) + '<span>' + ENTREGA + '</span></div>';
   note.hidden = false;
-  $("#mPrice").innerHTML = priceHTML(p.price);
+  $("#mPrice").innerHTML = p.price == null ? "Consultar precio" : priceHTML(p.price, p.sinDescuento);
+  $("#mAdd").hidden = p.price == null;
 }
 function closeProduct() {
   $("#modal").classList.remove("open");
@@ -3099,9 +3154,9 @@ $("#mClose").addEventListener("click", closeProduct);
 $("#modalBg").addEventListener("click", closeProduct);
 $("#mMinus").addEventListener("click", () => { mQty = Math.max(1, mQty - 1); $("#mQty").textContent = mQty; });
 $("#mPlus").addEventListener("click", () => { mQty = Math.min(99, mQty + 1); $("#mQty").textContent = mQty; });
-$("#mAdd").addEventListener("click", () => { if (mProd) { addToCart(mProd.id, mQty, curColor(mProd)); closeProduct(); } });
+$("#mAdd").addEventListener("click", () => { if (mProd && mProd.price != null) { addToCart(mProd.id, mQty, curColor(mProd), mProd.tallas ? curSize(mProd) : ""); closeProduct(); } });
 $("#mAsk").addEventListener("click", () => {
-  if (mProd) window.open(waLink("Hola, es un gusto saludarles. Estoy interesado(a) en el siguiente producto: " + variant(mProd).name + " (" + money(salePrice(variant(mProd).price)) + "), cantidad: " + mQty + ". ¿Podrían confirmarme su disponibilidad y el costo de envío a mi país?"), "_blank");
+  if (mProd) { const mp = variant(mProd); const priceText = mp.price == null ? "precio por confirmar" : money(salePrice(mp.price, mp.sinDescuento)); window.open(waLink("Hola, es un gusto saludarles. Estoy interesado(a) en el siguiente producto: " + mp.name + (mProd.tallas ? " · Talla " + curSize(mProd) : "") + " (" + priceText + "), cantidad: " + mQty + ". ¿Podrían confirmarme su disponibilidad y el costo de envío a mi país?"), "_blank"); }
 });
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") { closeProduct(); closePayment(); openCart(false); toggleMenu(false); }
