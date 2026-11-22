@@ -902,6 +902,41 @@ nav a.btn::after{display:none}
 @media(max-width:760px){.combos-section{padding:64px 0}.combos-track{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.combos-track{grid-template-columns:1fr}.combo-info{padding:18px}}
 
+
+/* En escritorio, Color y Talla aparecen en columnas verticales dentro del modal.
+   Se limita a Anillo de águila y Anillos Real; el diseño móvil permanece intacto. */
+@media (min-width: 861px) {
+  #mSw.ring-color-size {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
+    min-width: 0;
+  }
+  #mSw.ring-color-size > label,
+  #mSw.ring-color-size > select,
+  #mSw.ring-color-size > .m-sw {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+  #mSw.ring-color-size > label,
+  #mSw.ring-color-size > .m-sw label {
+    white-space: nowrap;
+  }
+  #mSw.ring-color-size > .m-sw {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    margin: 4px 0 0;
+  }
+  #mSw.ring-color-size > select,
+  #mSw.ring-color-size > .m-sw select {
+    width: 100%;
+  }
+}
 </style>
 <noscript><style>.hz,.reveal{opacity:1!important;transform:none!important}#splash{display:none}</style></noscript>
 </head>
@@ -3262,24 +3297,4 @@ startReveal();
 })();
 </script>
 
-/* Ajuste puntual del selector Color + Talla en la ventana de producto de escritorio. */
-@media (min-width:861px){
-  #mSw.ring-color-size{
-    display:grid;
-    grid-template-columns:auto minmax(0,1fr) auto minmax(0,1fr);
-    align-items:center;
-    column-gap:12px;
-    row-gap:8px;
-    width:100%;
-    min-width:0;
-  }
-  #mSw.ring-color-size > label,
-  #mSw.ring-color-size > select,
-  #mSw.ring-color-size > .m-sw{min-width:0;}
-  #mSw.ring-color-size > .m-sw{display:contents;margin:0;}
-  #mSw.ring-color-size > select,
-  #mSw.ring-color-size > .m-sw select{width:100%;min-width:0;}
-  #mSw.ring-color-size > label,
-  #mSw.ring-color-size > .m-sw label{white-space:nowrap;}
-}
 
