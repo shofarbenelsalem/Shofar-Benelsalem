@@ -527,7 +527,7 @@ nav a.btn::after{display:none}
   .trust-item strong{font-size:.86rem}
   .marquee{padding:16px 0}
   .mq-track span{font-size:1.4rem;padding:0 14px}
-  .grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .grid{grid-template-columns:1fr;gap:16px}
   .group{margin-bottom:48px}
   .group-head{gap:12px;margin-bottom:18px}
   .group-head .gi{width:44px;height:44px;border-radius:12px}
@@ -1487,14 +1487,14 @@ const PRODUCTS = [
   { id: 707, cat: "libros", name: "Biblia tanaj", desc: "Biblia Tanaj.", price: 250, img: "libro3.jpeg", orient: false },
 
   /* ---- Joyas ---- */
-  { id: 801, cat: "joyas", name: "Anillo hebreo de plata Ani l dodi v dodi li", desc: "Anillo hebreo de plata personalizado con la frase “Ani l dodi v dodi li”. Oferta especial: par por $250.", price: 150, img: "anillo1.jpeg", tallas: true},
+  { id: 801, cat: "joyas", name: "Anillo hebreo de plata Ani l dodi v dodi li", desc: "Anillo hebreo de plata personalizado con la frase “Ani l dodi v dodi li”. Oferta especial: par por $250.", price: 150, img: "anillo1.jpeg", tallas: true, orient: false},
   { id: 802, cat: "joyas", price: 50, desc: "Collar Estrella de David y Menorá para mujeres. Disponible en dorado y plata.", orient: false,
     nombre: (c) => "Collar estrella de David y Menorá para mujeres " + c,
     colores: [
       { k: "dorado", n: "dorado", t: "Dorado", img: "Collar estrella de david dorado.jpeg" },
       { k: "plata", n: "plata", t: "Plata", img: "Collar estrella de david plata.jpeg" }
     ] },
-  { id: 803, cat: "joyas", name: "Collar estrella de David para mujer", desc: "Collar Estrella de David para mujer.", price: 40, img: "Collar estrella de david para mujeres.jpeg"},
+  { id: 803, cat: "joyas", name: "Collar estrella de David para mujer", desc: "Collar Estrella de David para mujer.", price: 40, img: "Collar estrella de david para mujeres.jpeg", orient: false},
   { id: 804, cat: "joyas", price: 50, desc: "Collar Estrella de David para hombre. Disponible en dorado y plata.", orient: false,
     nombre: (c) => "Collar Estrella de David para hombre " + c,
     colores: [
@@ -1597,7 +1597,7 @@ function curSize(p) { return SEL_SIZE[p.id] || RING_SIZES[0]; }
 function sizeHTML(p, mobile) {
   if (!p.tallas) return "";
   return '<div class="sw' + (mobile ? ' m-sw' : '') + '"><label for="size-' + p.id + '">Talla</label><select id="size-' + p.id + '" data-size="' + p.id + '" aria-label="Seleccionar talla del anillo">' +
-    RING_SIZES.map(n => '<option value="' + n + '"' + (n === curSize(p) ? ' selected' : '') + '>Anillo ' + n + '</option>').join("") + '</select></div>';
+    RING_SIZES.map(n => '<option value="' + n + '"' + (n === curSize(p) ? ' selected' : '') + '>Número #' + n + '</option>').join("") + '</select></div>';
 }
 PRODUCTS.forEach(p => { if (p.colores) p.name = p.nombre(p.colores[0].n); });
 function curColor(p) { return p.colores ? (SEL[p.id] || p.colores[0].k) : ""; }
