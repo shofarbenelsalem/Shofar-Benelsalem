@@ -3130,6 +3130,9 @@ function fillModal() {
   const c = catOf(p.cat);
   const sw = $("#mSw");
   sw.innerHTML = (p.colores ? swHTML(mProd) : "") + sizeHTML(mProd, true);
+  // En escritorio, estos anillos muestran Color y Talla en una sola fila legible.
+  // En móvil se conserva el diseño vertical que ya funciona correctamente.
+  sw.classList.toggle("ring-color-size", [807, 808].includes(mProd.id));
   sw.hidden = !p.colores && !p.tallas;
   $("#mImg").innerHTML = icon(c.icon, 120, 1) + (p.img ? photo(p, p.name) : "");
   $("#mImg").classList.toggle("has-img", !!p.img);
@@ -3258,3 +3261,25 @@ startReveal();
   });
 })();
 </script>
+
+/* Ajuste puntual del selector Color + Talla en la ventana de producto de escritorio. */
+@media (min-width:861px){
+  #mSw.ring-color-size{
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr) auto minmax(0,1fr);
+    align-items:center;
+    column-gap:12px;
+    row-gap:8px;
+    width:100%;
+    min-width:0;
+  }
+  #mSw.ring-color-size > label,
+  #mSw.ring-color-size > select,
+  #mSw.ring-color-size > .m-sw{min-width:0;}
+  #mSw.ring-color-size > .m-sw{display:contents;margin:0;}
+  #mSw.ring-color-size > select,
+  #mSw.ring-color-size > .m-sw select{width:100%;min-width:0;}
+  #mSw.ring-color-size > label,
+  #mSw.ring-color-size > .m-sw label{white-space:nowrap;}
+}
+
